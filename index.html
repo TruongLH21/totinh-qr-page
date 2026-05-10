@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>For You ❤️</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    height:100vh;
+    position:relative;
+    color:white;
+}
+
+/* TIM RƠI */
+
+.heart{
+    position:absolute;
+    top:-10px;
+    color:#fff;
+    animation:fall linear forwards;
+    opacity:0.8;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+/* BOX CHÍNH */
+
+.main{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    z-index:10;
+    width:90%;
+    max-width:600px;
+}
+
+.main h1{
+    font-size:50px;
+    margin-bottom:20px;
+    text-shadow:0 0 20px rgba(255,255,255,0.8);
+}
+
+.main p{
+    font-size:20px;
+    margin-bottom:25px;
+}
+
+/* ẢNH */
+
+.gallery img{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+    border:4px solid white;
+    box-shadow:0 0 20px rgba(255,255,255,0.5);
+    margin-bottom:20px;
+}
+
+/* VIDEO */
+
+video{
+    width:100%;
+    border-radius:20px;
+    margin-top:15px;
+    box-shadow:0 0 20px rgba(255,255,255,0.4);
+}
+
+/* QR */
+
+.qr-box{
+    margin-top:25px;
+}
+
+#qrcode{
+    background:white;
+    padding:10px;
+    border-radius:20px;
+    display:inline-block;
+}
+
+/* LỜI NHẮN BAY */
+
+.message{
+    position:absolute;
+    white-space:nowrap;
+    font-size:22px;
+    animation:floatMessage linear forwards;
+    opacity:0.9;
+    text-shadow:0 0 10px rgba(255,255,255,0.8);
+}
+
+@keyframes floatMessage{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-120vh);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NHẠC -->
+<audio autoplay loop>
+    <!-- THAY LINK NHẠC -->
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="main">
+
+    <h1>❤️ Gửi Đến Cậu ❤️</h1>
+
+    <p>
+        Tớ không biết phải nói thế nào...<br>
+        Nhưng tớ thật sự rất thích cậu,yêu cậu,cho tôi làm người đặc biệt của cậu nhé! 🌸
+    </p>
+
+    <!-- ẢNH -->
+    <div class="gallery">
+
+        <!-- THAY ẢNH -->
+        <img src="myphoto.jpg">
+
+    </div>
+
+    <!-- VIDEO -->
+    <!-- THAY VIDEO -->
+    <video controls>
+        <source src=""C:\Users\Admin\CrossDevice\Không Khả Dụng\storage\DCIM\Camera\2026-02-14-133441776.mp4"">
+    </video>
+
+    <!-- QR -->
+    <div class="qr-box">
+        <h2>Quét để mở trái tim 💌</h2>
+
+        <div id="qrcode"></div>
+    </div>
+
+</div>
+
+<script>
+
+/* TIM RƠI */
+
+function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random()*100 + "vw";
+
+    heart.style.fontSize = Math.random()*20 + 15 + "px";
+
+    heart.style.animationDuration = Math.random()*3 + 3 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },7000);
+}
+
+setInterval(createHeart,200);
+
+
+/* LỜI NHẮN BAY */
+
+const messages = [
+    "Tớ thích cậu ❤️",
+    "Cậu đáng yêu lắm 🌸",
+    "Mong cậu luôn vui ✨",
+    "Có cậu là điều tuyệt nhất 💖",
+    "Tớ muốn ở bên cậu ☁️",
+    "I Like You 😳",
+    "Truong yeuuuu Titt nhieuu lắmmm",
+    "TItt cute xinh gái số 1 trong trái tim toii"
+];
+
+function createMessage(){
+
+    const msg = document.createElement("div");
+
+    msg.classList.add("message");
+
+    msg.innerHTML = messages[
+        Math.floor(Math.random()*messages.length)
+    ];
+
+    msg.style.left = Math.random()*90 + "vw";
+
+    msg.style.animationDuration =
+        Math.random()*6 + 5 + "s";
+
+    document.body.appendChild(msg);
+
+    setTimeout(()=>{
+        msg.remove();
+    },12000);
+}
+
+setInterval(createMessage,1200);
+
+
+/* QR CODE HÌNH TRÁI TIM */
+
+QRCode.toCanvas(
+    document.createElement('canvas'),
+    window.location.href,
+    {
+        width:200,
+        color:{
+            dark:"#ff0066",
+            light:"#ffffff"
+        }
+    },
+    function (err, canvas) {
+
+        if(err) console.error(err);
+
+        const box = document.getElementById("qrcode");
+
+        box.appendChild(canvas);
+
+        /* ICON TIM */
+
+        const heart = document.createElement("div");
+
+        heart.innerHTML = "❤️";
+
+        heart.style.position = "relative";
+        heart.style.marginTop = "-120px";
+        heart.style.fontSize = "40px";
+
+        box.appendChild(heart);
+    }
+);
+
+</script>
+
+</body>
+</html>
