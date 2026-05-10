@@ -1,3 +1,4 @@
+```html id="h2v8qp"
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -107,8 +108,6 @@ video{
 
     margin-top:15px;
 
-    pointer-events:none;
-
     box-shadow:0 0 20px rgba(255,255,255,0.4);
 }
 
@@ -177,25 +176,6 @@ button:hover{
     color:white;
 }
 
-/* NÚT RESET */
-
-#resetBtn{
-
-    position:fixed;
-
-    bottom:20px;
-
-    right:20px;
-
-    background:#ffffff33;
-
-    color:white;
-
-    font-size:18px;
-
-    z-index:9999;
-}
-
 /* TIMER */
 
 #loveTimer{
@@ -246,8 +226,8 @@ button:hover{
 
 <!-- NHẠC -->
 
-<audio autoplay loop>
-    <source src="music.mp3" type="audio/mpeg">
+<audio id="bgMusic" autoplay loop>
+    <source src="mot-doi.mp3" type="audio/mpeg">
 </audio>
 
 <div class="main">
@@ -268,7 +248,7 @@ button:hover{
 
     <!-- VIDEO -->
 
-    <video autoplay muted loop>
+    <video id="loveVideo" controls loop>
         <source src="your-video.mp4" type="video/mp4">
     </video>
 
@@ -299,14 +279,6 @@ button:hover{
     <div id="loveTimer"></div>
 
 </div>
-
-<!-- RESET -->
-
-<button id="resetBtn" onclick="resetLove()">
-
-    Reset 💔
-
-</button>
 
 <script>
 
@@ -549,8 +521,6 @@ yesBtn.onclick = function(){
 
 noBtn.onclick = function(){
 
-    /* CÂU CUỐI */
-
     if(currentQuestion === 3){
         return;
     }
@@ -654,18 +624,37 @@ function updateLoveTimer(){
 }
 
 
-/* RESET */
+/* VIDEO & NHẠC */
 
-function resetLove(){
+const bgMusic =
+    document.getElementById("bgMusic");
 
-    localStorage.removeItem(
-        "loveStart"
-    );
+const loveVideo =
+    document.getElementById("loveVideo");
 
-    location.reload();
-}
+/* VIDEO PHÁT -> TẮT NHẠC */
+
+loveVideo.addEventListener("play",()=>{
+
+    bgMusic.pause();
+});
+
+/* VIDEO DỪNG -> BẬT NHẠC */
+
+loveVideo.addEventListener("pause",()=>{
+
+    bgMusic.play();
+});
+
+/* VIDEO KẾT THÚC */
+
+loveVideo.addEventListener("ended",()=>{
+
+    bgMusic.play();
+});
 
 </script>
 
 </body>
 </html>
+```
