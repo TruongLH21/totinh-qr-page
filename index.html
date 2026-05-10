@@ -1,3 +1,4 @@
+```html id="q8m4xp"
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -171,6 +172,17 @@ button:hover{
     color:white;
 }
 
+#resetBtn{
+
+    background:#ffffff33;
+
+    color:white;
+
+    margin-top:20px;
+
+    font-size:18px;
+}
+
 /* TIMER */
 
 #loveTimer{
@@ -229,13 +241,12 @@ button:hover{
     <h1>❤️ Gửi Đến Cậu ❤️</h1>
 
     <p>
-        Tớ làm cái này cho cậu đó 😳
+        Chào mừng đến ngôi nhà trái tim của tuii 😳
     </p>
 
     <!-- ẢNH -->
     <div class="gallery">
 
-        <!-- THAY ẢNH -->
         <img src="your-image.jpg">
 
     </div>
@@ -256,21 +267,22 @@ button:hover{
     <div class="button-box">
 
         <button id="yesBtn">
-
             Có 💖
-
         </button>
 
         <button id="noBtn">
-
             Không 💔
-
         </button>
 
     </div>
 
     <!-- TIMER -->
     <div id="loveTimer"></div>
+
+    <!-- RESET -->
+    <button id="resetBtn" onclick="resetLove()">
+        Reset thời gian 💔
+    </button>
 
 </div>
 
@@ -316,7 +328,9 @@ const messages = [
 
     "Có cậu là tuyệt nhất 💖",
 
-    "Mong cậu luôn vui ✨"
+    "Mong cậu luôn vui,hạnh phúc ✨",
+
+    "Trường yêu Títtt ❤️"
 ];
 
 function createMessage(){
@@ -382,7 +396,7 @@ let loveStart =
     localStorage.getItem("loveStart");
 
 
-/* NẾU ĐÃ YÊU RỒI */
+/* NẾU ĐÃ YÊU */
 
 if(loveStart){
 
@@ -403,103 +417,107 @@ if(loveStart){
 
 yesBtn.onclick = function(){
 
-    currentQuestion++;
+    /* CÂU CUỐI */
 
-    /* CHƯA TỚI CÂU CUỐI */
+    if(currentQuestion === 3){
 
-    if(currentQuestion < questions.length){
+        /* PHÁO HOA TIM */
 
-        questionText.innerHTML =
-            questions[currentQuestion];
+        for(let i=0; i<220; i++){
 
-        /* CÂU CUỐI */
+            const heart =
+                document.createElement("div");
 
-        if(currentQuestion === 3){
+            heart.innerHTML = "❤️";
 
-            yesBtn.innerHTML =
-                "Đồng ý ❤️";
+            heart.style.position = "fixed";
 
-            noBtn.innerHTML =
-                "Không đồng ý 💔";
+            heart.style.left = "50%";
 
-            noBtn.onmouseover =
-                moveNoButton;
+            heart.style.top = "50%";
+
+            heart.style.fontSize =
+                Math.random()*35 + 20 + "px";
+
+            heart.style.pointerEvents = "none";
+
+            heart.style.zIndex = "9999";
+
+            const x =
+                (Math.random()-0.5)*1800;
+
+            const y =
+                (Math.random()-0.5)*1800;
+
+            heart.style.transition =
+                "transform 2s ease-out, opacity 2s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(()=>{
+
+                heart.style.transform =
+                    `translate(${x}px, ${y}px)`;
+
+                heart.style.opacity = "0";
+
+            },10);
+
+            setTimeout(()=>{
+                heart.remove();
+            },2000);
         }
 
-        return;
-    }
+        alert("Yêu nhau rồi nha ❤️");
 
-    /* PHÁO HOA TIM */
+        /* LƯU THỜI GIAN */
 
-    for(let i=0; i<220; i++){
+        if(!loveStart){
 
-        const heart =
-            document.createElement("div");
+            loveStart = new Date().getTime();
 
-        heart.innerHTML = "❤️";
-
-        heart.style.position = "fixed";
-
-        heart.style.left = "50%";
-
-        heart.style.top = "50%";
-
-        heart.style.fontSize =
-            Math.random()*35 + 20 + "px";
-
-        heart.style.pointerEvents = "none";
-
-        heart.style.zIndex = "9999";
-
-        const x =
-            (Math.random()-0.5)*1800;
-
-        const y =
-            (Math.random()-0.5)*1800;
-
-        heart.style.transition =
-            "transform 2s ease-out, opacity 2s";
-
-        document.body.appendChild(heart);
-
-        setTimeout(()=>{
-
-            heart.style.transform =
-                `translate(${x}px, ${y}px)`;
-
-            heart.style.opacity = "0";
-
-        },10);
-
-        setTimeout(()=>{
-            heart.remove();
-        },2000);
-    }
-
-    alert("Yêu nhau rồi nha 😭❤️");
-
-    /* LƯU THỜI GIAN */
-
-    if(!loveStart){
-
-        loveStart = new Date().getTime();
-
-        localStorage.setItem(
-            "loveStart",
-            loveStart
-        );
+            localStorage.setItem(
+                "loveStart",
+                loveStart
+            );
+        }
 
         loveTimer.style.display =
             "block";
 
-        yesBtn.style.display = "none";
+        yesBtn.style.display =
+            "none";
 
-        noBtn.style.display = "none";
+        noBtn.style.display =
+            "none";
 
         questionText.innerHTML =
             "💖 Chúng mình đang yêu nhau đó 💖";
 
         setInterval(updateLoveTimer,1000);
+
+        return;
+    }
+
+    /* CHUYỂN CÂU */
+
+    currentQuestion++;
+
+    questionText.innerHTML =
+        questions[currentQuestion];
+
+    /* CÂU CUỐI */
+
+    if(currentQuestion === 3){
+
+        yesBtn.innerHTML =
+            "Đồng ý ❤️";
+
+        noBtn.innerHTML =
+            "Không đồng ý 💔";
+
+        noBtn.onmouseover =
+            moveNoButton;
     }
 };
 
@@ -508,34 +526,27 @@ yesBtn.onclick = function(){
 
 noBtn.onclick = function(){
 
-    /* CÂU CUỐI THÌ KHÔNG CHẠY */
-
     if(currentQuestion === 3){
         return;
     }
 
     currentQuestion++;
 
-    if(currentQuestion < questions.length){
+    questionText.innerHTML =
+        questions[currentQuestion];
 
-        questionText.innerHTML =
-            questions[currentQuestion];
+    if(currentQuestion === 3){
 
-        /* CÂU CUỐI */
+        yesBtn.innerHTML =
+            "Đồng ý ❤️";
 
-        if(currentQuestion === 3){
+        noBtn.innerHTML =
+            "Không đồng ý 💔";
 
-            yesBtn.innerHTML =
-                "Đồng ý ❤️";
-
-            noBtn.innerHTML =
-                "Không đồng ý 💔";
-
-            noBtn.onmouseover =
-                moveNoButton;
-        }
+        noBtn.onmouseover =
+            moveNoButton;
     }
-}
+};
 
 
 /* NÚT KHÔNG CHẠY */
@@ -602,16 +613,28 @@ function updateLoveTimer(){
 
         `💖 Yêu nhau từ:
         ${day}/${month}/${year} 💖
+
         <br><br>
 
-        💞 Bên nhau được:
+        💞 Đã tin tưởng nhau được:
         ${days} ngày
         ${hours} giờ
         ${minutes} phút
         ${seconds} giây 💞`;
 }
 
+
+/* RESET */
+
+function resetLove(){
+
+    localStorage.removeItem("loveStart");
+
+    location.reload();
+}
+
 </script>
 
 </body>
 </html>
+```
