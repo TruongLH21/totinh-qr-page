@@ -1,4 +1,3 @@
-```html id="q8m4xp"
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -60,6 +59,8 @@ body{
 
     z-index:10;
 }
+
+/* TIÊU ĐỀ */
 
 .main h1{
 
@@ -158,12 +159,16 @@ button:hover{
     transform:scale(1.08);
 }
 
+/* NÚT CÓ */
+
 #yesBtn{
 
     background:white;
 
     color:#ff4f81;
 }
+
+/* NÚT KHÔNG */
 
 #noBtn{
 
@@ -172,15 +177,23 @@ button:hover{
     color:white;
 }
 
+/* NÚT RESET */
+
 #resetBtn{
+
+    position:fixed;
+
+    bottom:20px;
+
+    right:20px;
 
     background:#ffffff33;
 
     color:white;
 
-    margin-top:20px;
-
     font-size:18px;
+
+    z-index:9999;
 }
 
 /* TIMER */
@@ -232,6 +245,7 @@ button:hover{
 <body>
 
 <!-- NHẠC -->
+
 <audio autoplay loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -245,6 +259,7 @@ button:hover{
     </p>
 
     <!-- ẢNH -->
+
     <div class="gallery">
 
         <img src="your-image.jpg">
@@ -252,11 +267,13 @@ button:hover{
     </div>
 
     <!-- VIDEO -->
+
     <video autoplay muted loop>
         <source src="your-video.mp4" type="video/mp4">
     </video>
 
     <!-- CÂU HỎI -->
+
     <h2 id="questionText">
 
         Cậu thấy web này cute chứ? 😳
@@ -264,6 +281,7 @@ button:hover{
     </h2>
 
     <!-- NÚT -->
+
     <div class="button-box">
 
         <button id="yesBtn">
@@ -277,14 +295,18 @@ button:hover{
     </div>
 
     <!-- TIMER -->
+
     <div id="loveTimer"></div>
 
-    <!-- RESET -->
-    <button id="resetBtn" onclick="resetLove()">
-        Reset thời gian 💔
-    </button>
-
 </div>
+
+<!-- RESET -->
+
+<button id="resetBtn" onclick="resetLove()">
+
+    Reset 💔
+
+</button>
 
 <script>
 
@@ -417,7 +439,7 @@ if(loveStart){
 
 yesBtn.onclick = function(){
 
-    /* CÂU CUỐI */
+    /* NẾU LÀ CÂU CUỐI */
 
     if(currentQuestion === 3){
 
@@ -474,7 +496,8 @@ yesBtn.onclick = function(){
 
         if(!loveStart){
 
-            loveStart = new Date().getTime();
+            loveStart =
+                new Date().getTime();
 
             localStorage.setItem(
                 "loveStart",
@@ -526,6 +549,8 @@ yesBtn.onclick = function(){
 
 noBtn.onclick = function(){
 
+    /* CÂU CUỐI */
+
     if(currentQuestion === 3){
         return;
     }
@@ -561,11 +586,14 @@ function moveNoButton(){
         Math.random()*
         (window.innerHeight-100);
 
-    noBtn.style.position = "fixed";
+    noBtn.style.position =
+        "fixed";
 
-    noBtn.style.left = x + "px";
+    noBtn.style.left =
+        x + "px";
 
-    noBtn.style.top = y + "px";
+    noBtn.style.top =
+        y + "px";
 }
 
 
@@ -573,10 +601,12 @@ function moveNoButton(){
 
 function updateLoveTimer(){
 
-    const now = new Date();
+    const now =
+        new Date();
 
     const diff =
-        now.getTime() - Number(loveStart);
+        now.getTime() -
+        Number(loveStart);
 
     const days = Math.floor(
         diff / (1000*60*60*24)
@@ -628,7 +658,9 @@ function updateLoveTimer(){
 
 function resetLove(){
 
-    localStorage.removeItem("loveStart");
+    localStorage.removeItem(
+        "loveStart"
+    );
 
     location.reload();
 }
@@ -637,4 +669,3 @@ function resetLove(){
 
 </body>
 </html>
-```
