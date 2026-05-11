@@ -16,38 +16,22 @@
 
 body{
     font-family:Arial,sans-serif;
-    overflow:hidden;
+    overflow-x:hidden;
     background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    height:100vh;
+    min-height:100vh;
     position:relative;
     color:white;
 }
 
-/* TIM RƠI */
-.heart{
-    position:absolute;
-    top:-10px;
-    color:white;
-    animation:fall linear forwards;
-    opacity:0.8;
-    pointer-events:none;
-}
+/* MAIN */
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh);
-    }
-}
-
-/* KHUNG CHÍNH */
 .main{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
     width:90%;
     max-width:700px;
+    margin:auto;
     text-align:center;
+    padding:40px 0 100px;
+    position:relative;
     z-index:10;
 }
 
@@ -63,6 +47,7 @@ body{
 }
 
 /* ẢNH */
+
 .gallery img{
     width:240px;
     height:240px;
@@ -74,6 +59,7 @@ body{
 }
 
 /* VIDEO */
+
 video{
     width:100%;
     border-radius:20px;
@@ -82,13 +68,15 @@ video{
 }
 
 /* CÂU HỎI */
+
 #questionText{
     margin-top:30px;
     font-size:34px;
     text-shadow:0 0 15px rgba(255,255,255,0.8);
 }
 
-/* NÚT */
+/* BUTTON */
+
 .button-box{
     margin-top:35px;
     position:relative;
@@ -100,7 +88,7 @@ button{
     margin:10px;
     border:none;
     border-radius:50px;
-    font-size:24px;
+    font-size:22px;
     cursor:pointer;
     font-weight:bold;
     transition:0.25s;
@@ -122,6 +110,7 @@ button:hover{
 }
 
 /* TIMER */
+
 #loveTimer{
     margin-top:30px;
     font-size:28px;
@@ -131,7 +120,106 @@ button:hover{
     line-height:1.7;
 }
 
+/* ONLINE */
+
+#onlineStatus{
+    margin-top:20px;
+    font-size:18px;
+}
+
+/* NICKNAME */
+
+.nickname-box{
+    margin-top:20px;
+}
+
+.nickname-box input{
+    padding:12px;
+    border:none;
+    border-radius:15px;
+    outline:none;
+    width:250px;
+    max-width:90%;
+    font-size:16px;
+}
+
+/* CHAT */
+
+.chat-box{
+    margin-top:40px;
+    background:rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:25px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 20px rgba(255,255,255,0.3);
+}
+
+.chat-box h2{
+    margin-bottom:15px;
+}
+
+#chatMessages{
+    height:300px;
+    overflow-y:auto;
+    background:rgba(0,0,0,0.15);
+    padding:15px;
+    border-radius:15px;
+    text-align:left;
+}
+
+.message-item{
+    background:rgba(255,255,255,0.2);
+    padding:12px;
+    border-radius:15px;
+    margin-bottom:12px;
+    word-wrap:break-word;
+}
+
+.message-name{
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.message-status{
+    margin-top:5px;
+    font-size:12px;
+    opacity:0.8;
+}
+
+.chat-input{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.chat-input input{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:15px;
+    outline:none;
+    font-size:16px;
+}
+
+/* TIM RƠI */
+
+.heart{
+    position:absolute;
+    top:-10px;
+    color:white;
+    animation:fall linear forwards;
+    opacity:0.8;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(130vh);
+    }
+}
+
 /* CHỮ BAY */
+
 .message{
     position:absolute;
     white-space:nowrap;
@@ -142,8 +230,15 @@ button:hover{
 }
 
 @keyframes floatMessage{
-    from{ transform:translateY(100vh); }
-    to{ transform:translateY(-120vh); }
+
+    from{
+        transform:translateY(120vh);
+    }
+
+    to{
+        transform:translateY(-220vh);
+    }
+
 }
 
 </style>
@@ -152,6 +247,7 @@ button:hover{
 <body>
 
 <!-- NHẠC -->
+
 <audio id="bgMusic" autoplay loop>
     <source src="mot-doi.mp3.mp3" type="audio/mpeg">
 </audio>
@@ -160,33 +256,83 @@ button:hover{
 
     <h1>❤️ Gửi Đến Cậu ❤️</h1>
 
-    <p>Chào mừng đến ngôi nhà trái tim của tụi mình 💞</p>
+    <p>
+        Chào mừng đến ngôi nhà trái tim của tuiii 💞
+    </p>
 
     <div class="gallery">
-        <img src="your-image.jpg" alt="">
+        <img src="your-image.jpg">
     </div>
 
     <video id="loveVideo" controls loop>
         <source src="your-video.mp4" type="video/mp4">
     </video>
 
-    <h2 id="questionText">Cậu thấy web này cute chứ? 😳</h2>
+    <h2 id="questionText">
+        Cậu thấy web này cute chứ? 😳
+    </h2>
 
     <div class="button-box">
-        <button id="yesBtn">Có 💖</button>
-        <button id="noBtn">Không 💔</button>
+
+        <button id="yesBtn">
+            Có 💖
+        </button>
+
+        <button id="noBtn">
+            Không 💔
+        </button>
+
     </div>
 
     <div id="loveTimer"></div>
 
+    <!-- ONLINE -->
+
+    <div id="onlineStatus">
+        🟢 Đang kết nối realtime...
+    </div>
+
+    <!-- NICKNAME -->
+
+    <div class="nickname-box">
+
+        <input
+            type="text"
+            id="nicknameInput"
+            placeholder="Nhập biệt danh của bạn 💖"
+        >
+
+    </div>
+
+    <!-- CHAT -->
+
+    <div class="chat-box">
+
+        <h2>💬 Chat realtime</h2>
+
+        <div id="chatMessages"></div>
+
+        <div class="chat-input">
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Nhắn gì đó..."
+            >
+
+            <button id="sendBtn">
+                Gửi 💖
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- FIREBASE -->
 <script type="module">
 
-/* =========================
-   FIREBASE IMPORT
-========================= */
+/* FIREBASE */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -195,75 +341,157 @@ import {
     getDatabase,
     ref,
     set,
-    onValue
+    push,
+    onValue,
+    onDisconnect,
+    update
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-
-/* =========================
-   FIREBASE CONFIG
-========================= */
+/* CONFIG */
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyA6tepLaxllmVi00SmK_50wqWSmgBVOydc",
+
   authDomain: "totinhlh21.firebaseapp.com",
+
   databaseURL: "https://totinhlh21-default-rtdb.firebaseio.com",
+
   projectId: "totinhlh21",
+
   storageBucket: "totinhlh21.firebasestorage.app",
+
   messagingSenderId: "1063225037975",
+
   appId: "1:1063225037975:web:32e6bd68924de746e785d2",
+
   measurementId: "G-RLRNSCVD3K"
+
 };
 
-
-/* =========================
-   INIT FIREBASE
-========================= */
+/* INIT */
 
 const app = initializeApp(firebaseConfig);
 
 const db = getDatabase(app);
 
-/* NODE REALTIME CHUNG */
-const loveRef = ref(db, "loveRoom");
+const loveRef = ref(db,"loveRoom");
 
+const chatRef = ref(db,"messages");
 
-/* =========================
-   NHẠC TỰ PHÁT
-========================= */
+/* UI */
 
-window.addEventListener("load", () => {
+const questionText =
+document.getElementById("questionText");
 
-    const bgMusic = document.getElementById("bgMusic");
+const yesBtn =
+document.getElementById("yesBtn");
 
-    bgMusic.play().catch(() => {
+const noBtn =
+document.getElementById("noBtn");
 
-        document.body.addEventListener("click", () => {
+const loveTimer =
+document.getElementById("loveTimer");
+
+const onlineStatus =
+document.getElementById("onlineStatus");
+
+const sendBtn =
+document.getElementById("sendBtn");
+
+const messageInput =
+document.getElementById("messageInput");
+
+const chatMessages =
+document.getElementById("chatMessages");
+
+const nicknameInput =
+document.getElementById("nicknameInput");
+
+const bgMusic =
+document.getElementById("bgMusic");
+
+const loveVideo =
+document.getElementById("loveVideo");
+
+/* NICKNAME */
+
+let myName =
+localStorage.getItem("nickname") || "Người bí ẩn 💖";
+
+nicknameInput.value = myName;
+
+nicknameInput.addEventListener("change",()=>{
+
+    myName =
+    nicknameInput.value.trim();
+
+    if(myName === ""){
+        myName = "Người bí ẩn 💖";
+    }
+
+    localStorage.setItem("nickname",myName);
+
+});
+
+/* NHẠC */
+
+window.addEventListener("load",()=>{
+
+    bgMusic.volume = 0.2;
+
+    bgMusic.play().catch(()=>{
+
+        document.body.addEventListener("click",()=>{
+
             bgMusic.play();
-        }, { once:true });
+
+        },{ once:true });
 
     });
 
 });
 
+/* VIDEO */
 
-/* =========================
-   TIM RƠI
-========================= */
+loveVideo.addEventListener("play",()=>{
+
+    bgMusic.pause();
+
+});
+
+loveVideo.addEventListener("pause",()=>{
+
+    bgMusic.play();
+
+});
+
+loveVideo.addEventListener("ended",()=>{
+
+    bgMusic.play();
+
+});
+
+/* TIM */
 
 function createHeart(){
 
-    const heart = document.createElement("div");
+    const heart =
+    document.createElement("div");
 
     heart.classList.add("heart");
 
     heart.innerHTML = "❤️";
 
-    heart.style.left = Math.random()*100 + "vw";
+    heart.style.left =
+    Math.random()*100 + "vw";
 
-    heart.style.fontSize = Math.random()*20 + 15 + "px";
+    heart.style.fontSize =
+    Math.random()*20 + 15 + "px";
 
-    heart.style.animationDuration = Math.random()*3 + 3 + "s";
+    heart.style.animationDuration =
+    Math.random()*3 + 3 + "s";
 
     document.body.appendChild(heart);
 
@@ -275,32 +503,39 @@ function createHeart(){
 
 setInterval(createHeart,200);
 
-
-/* =========================
-   CHỮ BAY
-========================= */
+/* CHỮ BAY */
 
 const messages = [
+
     "Tớ thích cậu ❤️",
+
     "Cậu đáng yêu lắm 🌸",
+
     "Có cậu là tuyệt nhất 💖",
+
     "Mong cậu luôn vui ✨",
+
     "Trường yêu Títtt ❤️"
+
 ];
 
 function createMessage(){
 
-    const msg = document.createElement("div");
+    const msg =
+    document.createElement("div");
 
     msg.classList.add("message");
 
     msg.innerHTML =
-        messages[Math.floor(Math.random()*messages.length)];
+    messages[
+        Math.floor(Math.random()*messages.length)
+    ];
 
-    msg.style.left = Math.random()*90 + "vw";
+    msg.style.left =
+    Math.random()*90 + "vw";
 
     msg.style.animationDuration =
-        Math.random()*6 + 5 + "s";
+    Math.random()*6 + 5 + "s";
 
     document.body.appendChild(msg);
 
@@ -312,38 +547,29 @@ function createMessage(){
 
 setInterval(createMessage,1200);
 
-
-/* =========================
-   CÂU HỎI
-========================= */
+/* QUESTIONS */
 
 const questions = [
+
     "Cậu thấy web này cute chứ? 😳",
+
     "Làm như này cậu thấy vui không? 🌸",
+
     "Cậu có bất ngờ không? 💖",
-    "Cậu đồng ý làm người yêu tớ nhớ 😭❤️"
+
+    "Cậu đồng ý làm người yêu tớ nhóo❤️"
+
 ];
 
 let currentQuestion = 0;
-
-const questionText = document.getElementById("questionText");
-
-const yesBtn = document.getElementById("yesBtn");
-
-const noBtn = document.getElementById("noBtn");
-
-const loveTimer = document.getElementById("loveTimer");
 
 let loveStart = null;
 
 let timerStarted = false;
 
+/* REALTIME LOVE */
 
-/* =========================
-   REALTIME LISTENER
-========================= */
-
-onValue(loveRef, (snapshot) => {
+onValue(loveRef,(snapshot)=>{
 
     const data = snapshot.val();
 
@@ -352,7 +578,7 @@ onValue(loveRef, (snapshot) => {
         loveStart = data.startTime;
 
         questionText.innerHTML =
-            "💖 Chúng mình đang yêu nhau đó 💖";
+        "💖 Chúng mình đã trở thành người đặc biệt của nhau 💖";
 
         yesBtn.style.display = "none";
 
@@ -374,20 +600,21 @@ onValue(loveRef, (snapshot) => {
 
 });
 
-
-/* =========================
-   YES BUTTON
-========================= */
+/* YES */
 
 yesBtn.onclick = function(){
 
     if(currentQuestion === 3){
 
-        const now = new Date().getTime();
+        const now =
+        new Date().getTime();
 
         set(loveRef,{
+
             accepted:true,
+
             startTime:now
+
         });
 
         return;
@@ -396,24 +623,25 @@ yesBtn.onclick = function(){
 
     currentQuestion++;
 
-    questionText.innerHTML = questions[currentQuestion];
+    questionText.innerHTML =
+    questions[currentQuestion];
 
     if(currentQuestion === 3){
 
-        yesBtn.innerHTML = "Đồng ý ❤️";
+        yesBtn.innerHTML =
+        "Đồng ý ❤️";
 
-        noBtn.innerHTML = "Không đồng ý 💔";
+        noBtn.innerHTML =
+        "Không đồng ý 💔";
 
-        noBtn.onmouseover = moveNoButton;
+        noBtn.onmouseover =
+        moveNoButton;
 
     }
 
 };
 
-
-/* =========================
-   NO BUTTON
-========================= */
+/* NO */
 
 noBtn.onclick = function(){
 
@@ -423,15 +651,19 @@ noBtn.onclick = function(){
 
     currentQuestion++;
 
-    questionText.innerHTML = questions[currentQuestion];
+    questionText.innerHTML =
+    questions[currentQuestion];
 
     if(currentQuestion === 3){
 
-        yesBtn.innerHTML = "Đồng ý ❤️";
+        yesBtn.innerHTML =
+        "Đồng ý ❤️";
 
-        noBtn.innerHTML = "Không đồng ý 💔";
+        noBtn.innerHTML =
+        "Không đồng ý 💔";
 
-        noBtn.onmouseover = moveNoButton;
+        noBtn.onmouseover =
+        moveNoButton;
 
     }
 
@@ -439,20 +671,22 @@ noBtn.onclick = function(){
 
 function moveNoButton(){
 
-    noBtn.style.position = "fixed";
+    noBtn.style.position =
+    "fixed";
 
     noBtn.style.left =
-        Math.random()*(window.innerWidth-200) + "px";
+    Math.random()*
+    (window.innerWidth-200)
+    + "px";
 
     noBtn.style.top =
-        Math.random()*(window.innerHeight-100) + "px";
+    Math.random()*
+    (window.innerHeight-100)
+    + "px";
 
 }
 
-
-/* =========================
-   TIMER
-========================= */
+/* TIMER */
 
 function updateLoveTimer(){
 
@@ -460,22 +694,33 @@ function updateLoveTimer(){
 
     const now = new Date();
 
-    const diff = now.getTime() - Number(loveStart);
+    const diff =
+    now.getTime() -
+    Number(loveStart);
 
     const days =
-        Math.floor(diff/(1000*60*60*24));
+    Math.floor(diff/(1000*60*60*24));
 
     const hours =
-        Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    Math.floor(
+    (diff%(1000*60*60*24))
+    /(1000*60*60)
+    );
 
     const minutes =
-        Math.floor((diff%(1000*60*60))/(1000*60));
+    Math.floor(
+    (diff%(1000*60*60))
+    /(1000*60)
+    );
 
     const seconds =
-        Math.floor((diff%(1000*60))/1000);
+    Math.floor(
+    (diff%(1000*60))
+    /1000
+    );
 
     const startDate =
-        new Date(Number(loveStart));
+    new Date(Number(loveStart));
 
     loveTimer.innerHTML =
     `
@@ -486,7 +731,7 @@ function updateLoveTimer(){
 
     <br><br>
 
-    💞 Đã bên nhau:
+    💞 Đã tin tưởng nhau:
     ${days} ngày
     ${hours} giờ
     ${minutes} phút
@@ -495,27 +740,142 @@ function updateLoveTimer(){
 
 }
 
+/* ONLINE CHUẨN */
 
-/* =========================
-   VIDEO ↔ NHẠC
-========================= */
+const myId =
+"user_" + Math.random().toString(36).slice(2);
 
-const bgMusic =
-    document.getElementById("bgMusic");
+const myOnlineRef =
+ref(db,"onlineUsers/" + myId);
 
-const loveVideo =
-    document.getElementById("loveVideo");
-
-loveVideo.addEventListener("play",()=>{
-    bgMusic.pause();
+set(myOnlineRef,{
+    online:true,
+    time:Date.now()
 });
 
-loveVideo.addEventListener("pause",()=>{
-    bgMusic.play();
+onDisconnect(myOnlineRef).remove();
+
+const allOnlineRef =
+ref(db,"onlineUsers");
+
+onValue(allOnlineRef,(snapshot)=>{
+
+    const data = snapshot.val();
+
+    if(!data){
+
+        onlineStatus.innerHTML =
+        "⚪ Không có ai online";
+
+        return;
+    }
+
+    const count =
+    Object.keys(data).length;
+
+    if(count === 1){
+
+        onlineStatus.innerHTML =
+        "🟢 Có 1 người đang online";
+
+    }else{
+
+        onlineStatus.innerHTML =
+        `🟢 Có ${count} người đang online`;
+
+    }
+
 });
 
-loveVideo.addEventListener("ended",()=>{
-    bgMusic.play();
+/* CHAT */
+
+sendBtn.onclick = ()=>{
+
+    const text =
+    messageInput.value.trim();
+
+    if(text === "") return;
+
+    bgMusic.volume = 0.05;
+
+    const msgRef = push(chatRef);
+
+    set(msgRef,{
+
+        name:myName,
+
+        text:text,
+
+        time:Date.now(),
+
+        status:"Đã gửi 💌"
+
+    });
+
+    setTimeout(()=>{
+
+        update(msgRef,{
+            status:"Đã xem 👀"
+        });
+
+    },2000);
+
+    messageInput.value = "";
+
+    setTimeout(()=>{
+        bgMusic.volume = 0.2;
+    },3000);
+
+};
+
+messageInput.addEventListener("keypress",(e)=>{
+
+    if(e.key === "Enter"){
+
+        sendBtn.click();
+
+    }
+
+});
+
+onValue(chatRef,(snapshot)=>{
+
+    chatMessages.innerHTML = "";
+
+    const data = snapshot.val();
+
+    if(!data) return;
+
+    Object.values(data).forEach(msg=>{
+
+        const div =
+        document.createElement("div");
+
+        div.classList.add("message-item");
+
+        div.innerHTML =
+
+        `
+        <div class="message-name">
+            💖 ${msg.name}
+        </div>
+
+        <div>
+            ${msg.text}
+        </div>
+
+        <div class="message-status">
+            ${msg.status}
+        </div>
+        `;
+
+        chatMessages.appendChild(div);
+
+    });
+
+    chatMessages.scrollTop =
+    chatMessages.scrollHeight;
+
 });
 
 </script>
