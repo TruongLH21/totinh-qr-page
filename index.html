@@ -1,153 +1,172 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            height: 100vh;
-            position: relative;
-            color: white;
-            cursor: pointer;
-        }
+<title>For You ❤️</title>
 
-        /* TIM RƠI */
-        .heart {
-            position: absolute;
-            top: -10px;
-            color: white;
-            animation: fall linear forwards;
-            opacity: 0.8;
-            pointer-events: none;
-        }
+<style>
 
-        @keyframes fall {
-            to { transform: translateY(110vh); }
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        /* KHUNG CHÍNH */
-        .main {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 700px;
-            text-align: center;
-            z-index: 10;
-        }
+body{
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    height:100vh;
+    position:relative;
+    color:white;
+}
 
-        .main h1 {
-            font-size: 40px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-        }
+/* TIM RƠI */
+.heart{
+    position:absolute;
+    top:-10px;
+    color:white;
+    animation:fall linear forwards;
+    opacity:0.8;
+    pointer-events:none;
+}
 
-        .main p {
-            font-size: 18px;
-            margin-bottom: 25px;
-        }
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+    }
+}
 
-        /* ẢNH */
-        .gallery img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 25px;
-            border: 4px solid white;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
-            margin-bottom: 20px;
-        }
+/* KHUNG CHÍNH */
+.main{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:90%;
+    max-width:700px;
+    text-align:center;
+    z-index:10;
+}
 
-        /* VIDEO */
-        video {
-            width: 100%;
-            border-radius: 20px;
-            margin-top: 15px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-        }
+.main h1{
+    font-size:50px;
+    margin-bottom:20px;
+    text-shadow:0 0 20px rgba(255,255,255,0.8);
+}
 
-        /* CÂU HỎI */
-        #questionText {
-            margin-top: 30px;
-            font-size: 28px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-        }
+.main p{
+    font-size:22px;
+    margin-bottom:25px;
+}
 
-        /* NÚT */
-        .button-box {
-            margin-top: 35px;
-            position: relative;
-            height: 140px;
-        }
+/* ẢNH */
+.gallery img{
+    width:240px;
+    height:240px;
+    object-fit:cover;
+    border-radius:25px;
+    border:4px solid white;
+    box-shadow:0 0 25px rgba(255,255,255,0.5);
+    margin-bottom:20px;
+}
 
-        button {
-            padding: 15px 30px;
-            margin: 10px;
-            border: none;
-            border-radius: 50px;
-            font-size: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.25s;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-        }
+/* VIDEO */
+video{
+    width:100%;
+    border-radius:20px;
+    margin-top:15px;
+    box-shadow:0 0 20px rgba(255,255,255,0.4);
+}
 
-        #yesBtn { background: white; color: #ff4f81; }
-        #noBtn { background: #222; color: white; }
+/* CÂU HỎI */
+#questionText{
+    margin-top:30px;
+    font-size:34px;
+    text-shadow:0 0 15px rgba(255,255,255,0.8);
+}
 
-        /* TIMER */
-        #loveTimer {
-            margin-top: 30px;
-            font-size: 22px;
-            font-weight: bold;
-            display: none;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-        }
+/* NÚT */
+.button-box{
+    margin-top:35px;
+    position:relative;
+    height:160px;
+}
 
-        /* CHỮ BAY */
-        .message {
-            position: absolute;
-            white-space: nowrap;
-            font-size: 20px;
-            animation: floatMessage linear forwards;
-            opacity: 0.9;
-            pointer-events: none;
-        }
+button{
+    padding:16px 35px;
+    margin:10px;
+    border:none;
+    border-radius:50px;
+    font-size:24px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.25s;
+    box-shadow:0 0 20px rgba(255,255,255,0.5);
+}
 
-        @keyframes floatMessage {
-            from { transform: translateY(100vh); }
-            to { transform: translateY(-120vh); }
-        }
-    </style>
+button:hover{
+    transform:scale(1.08);
+}
+
+#yesBtn{
+    background:white;
+    color:#ff4f81;
+}
+
+#noBtn{
+    background:#222;
+    color:white;
+}
+
+/* TIMER */
+#loveTimer{
+    margin-top:30px;
+    font-size:28px;
+    font-weight:bold;
+    display:none;
+    text-shadow:0 0 20px rgba(255,255,255,0.9);
+    line-height:1.7;
+}
+
+/* CHỮ BAY */
+.message{
+    position:absolute;
+    white-space:nowrap;
+    font-size:22px;
+    animation:floatMessage linear forwards;
+    opacity:0.9;
+    pointer-events:none;
+}
+
+@keyframes floatMessage{
+    from{ transform:translateY(100vh); }
+    to{ transform:translateY(-120vh); }
+}
+
+</style>
 </head>
+
 <body>
 
-<!-- NHẠC (ẨN THANH ĐIỀU KHIỂN) -->
-<audio id="bgMusic" loop>
+<!-- NHẠC -->
+<audio id="bgMusic" autoplay loop>
     <source src="mot-doi.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <div class="main">
+
     <h1>❤️ Gửi Đến Cậu ❤️</h1>
-    <p>Chào mừng đến ngôi nhà trái tim của tuii 😳</p>
+
+    <p>Chào mừng đến ngôi nhà trái tim của tụi mình 💞</p>
 
     <div class="gallery">
-        <img src="your-image.jpg" alt="Kỷ niệm">
+        <img src="your-image.jpg" alt="">
     </div>
 
-    <video id="loveVideo" controls>
+    <video id="loveVideo" controls loop>
         <source src="your-video.mp4" type="video/mp4">
     </video>
 
@@ -159,139 +178,346 @@
     </div>
 
     <div id="loveTimer"></div>
+
 </div>
 
-<script>
+<!-- FIREBASE -->
+<script type="module">
+
+/* =========================
+   FIREBASE IMPORT
+========================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    set,
+    onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA6tepLaxllmVi00SmK_50wqWSmgBVOydc",
+  authDomain: "totinhlh21.firebaseapp.com",
+  databaseURL: "https://totinhlh21-default-rtdb.firebaseio.com",
+  projectId: "totinhlh21",
+  storageBucket: "totinhlh21.firebasestorage.app",
+  messagingSenderId: "1063225037975",
+  appId: "1:1063225037975:web:32e6bd68924de746e785d2",
+  measurementId: "G-RLRNSCVD3K"
+};
+
+
+/* =========================
+   INIT FIREBASE
+========================= */
+
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+/* NODE REALTIME CHUNG */
+const loveRef = ref(db, "loveRoom");
+
+
+/* =========================
+   NHẠC TỰ PHÁT
+========================= */
+
+window.addEventListener("load", () => {
+
     const bgMusic = document.getElementById("bgMusic");
-    const loveVideo = document.getElementById("loveVideo");
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const questionText = document.getElementById("questionText");
-    const loveTimer = document.getElementById("loveTimer");
 
-    // 1. PHÁT NHẠC KHI NGƯỜI DÙNG CLICK VÀO WEB (VƯỢT RÀO CẢN TRÌNH DUYỆT)
-    document.body.addEventListener('click', () => {
-        if (bgMusic.paused && loveVideo.paused) {
-            bgMusic.play().catch(e => console.log("Audio play blocked"));
-        }
-    }, { once: true });
+    bgMusic.play().catch(() => {
 
-    // 2. TẮT NHẠC KHI BẬT VIDEO, BẬT LẠI KHI VIDEO DỪNG
-    loveVideo.addEventListener("play", () => { bgMusic.pause(); });
-    loveVideo.addEventListener("pause", () => { bgMusic.play(); });
-    loveVideo.addEventListener("ended", () => { bgMusic.play(); });
+        document.body.addEventListener("click", () => {
+            bgMusic.play();
+        }, { once:true });
 
-    // 3. HIỆU ỨNG TIM RƠI
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = Math.random() * 20 + 15 + "px";
-        heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => { heart.remove(); }, 6000);
-    }
-    setInterval(createHeart, 300);
+    });
 
-    // 4. CHỮ BAY
-    const messages = ["Tớ thích cậu ❤️", "Cậu đáng yêu lắm 🌸", "Có cậu là tuyệt nhất 💖", "Mãi bên nhau nhé ✨", "Trường yêu Títtt ❤️"];
-    function createMessage() {
-        const msg = document.createElement("div");
-        msg.classList.add("message");
-        msg.innerHTML = messages[Math.floor(Math.random() * messages.length)];
-        msg.style.left = Math.random() * 80 + "vw";
-        msg.style.animationDuration = Math.random() * 5 + 5 + "s";
-        document.body.appendChild(msg);
-        setTimeout(() => { msg.remove(); }, 10000);
-    }
-    setInterval(createMessage, 1500);
+});
 
-    // 5. LOGIC CÂU HỎI & NÚT BẤM
-    const questions = [
-        "Cậu thấy web này cute chứ? 😳",
-        "Làm như này cậu thấy vui không? 🌸",
-        "Cậu có bất ngờ không? 💖",
-        "Cậu đồng ý làm người yêu tớ nhớ 😭❤️"
-    ];
-    let currentQuestion = 0;
 
-    function moveNoButton() {
-        const x = Math.random() * (window.innerWidth - 150);
-        const y = Math.random() * (window.innerHeight - 100);
-        noBtn.style.position = "fixed";
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    }
+/* =========================
+   TIM RƠI
+========================= */
 
-    yesBtn.onclick = function() {
-        if (currentQuestion < 3) {
-            currentQuestion++;
-            questionText.innerHTML = questions[currentQuestion];
-            if (currentQuestion === 3) {
-                yesBtn.innerHTML = "Đồng ý ❤️";
-                noBtn.innerHTML = "Không đồng ý 💔";
-                noBtn.onmouseover = moveNoButton;
-            }
-        } else {
-            // Hiệu ứng pháo hoa tim khi đồng ý
-            for(let i=0; i<150; i++){
-                const h = document.createElement("div");
-                h.innerHTML = "❤️";
-                h.style.position = "fixed";
-                h.style.left = "50%"; h.style.top = "50%";
-                h.style.transition = "all 2s ease-out";
-                h.style.fontSize = "20px";
-                document.body.appendChild(h);
-                const rx = (Math.random()-0.5)*1500;
-                const ry = (Math.random()-0.5)*1500;
-                setTimeout(() => {
-                    h.style.transform = `translate(${rx}px, ${ry}px)`;
-                    h.style.opacity = "0";
-                }, 10);
-                setTimeout(() => h.remove(), 2000);
-            }
-            alert("Yêu nhau rồi nha ❤️");
-            startLoveTimer();
-        }
-    };
+function createHeart(){
 
-    noBtn.onclick = function() {
-        if (currentQuestion < 3) {
-            currentQuestion++;
-            questionText.innerHTML = questions[currentQuestion];
-        }
-    };
+    const heart = document.createElement("div");
 
-    // 6. TIMER KỶ NIỆM
-    let loveStart = localStorage.getItem("loveStart");
+    heart.classList.add("heart");
 
-    function startLoveTimer() {
-        if (!loveStart) {
-            loveStart = new Date().getTime();
-            localStorage.setItem("loveStart", loveStart);
-        }
-        loveTimer.style.display = "block";
-        questionText.innerHTML = "💖 Chúng mình đang yêu nhau đó 💖";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random()*100 + "vw";
+
+    heart.style.fontSize = Math.random()*20 + 15 + "px";
+
+    heart.style.animationDuration = Math.random()*3 + 3 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },7000);
+
+}
+
+setInterval(createHeart,200);
+
+
+/* =========================
+   CHỮ BAY
+========================= */
+
+const messages = [
+    "Tớ thích cậu ❤️",
+    "Cậu đáng yêu lắm 🌸",
+    "Có cậu là tuyệt nhất 💖",
+    "Mong cậu luôn vui ✨",
+    "Trường yêu Títtt ❤️"
+];
+
+function createMessage(){
+
+    const msg = document.createElement("div");
+
+    msg.classList.add("message");
+
+    msg.innerHTML =
+        messages[Math.floor(Math.random()*messages.length)];
+
+    msg.style.left = Math.random()*90 + "vw";
+
+    msg.style.animationDuration =
+        Math.random()*6 + 5 + "s";
+
+    document.body.appendChild(msg);
+
+    setTimeout(()=>{
+        msg.remove();
+    },12000);
+
+}
+
+setInterval(createMessage,1200);
+
+
+/* =========================
+   CÂU HỎI
+========================= */
+
+const questions = [
+    "Cậu thấy web này cute chứ? 😳",
+    "Làm như này cậu thấy vui không? 🌸",
+    "Cậu có bất ngờ không? 💖",
+    "Cậu đồng ý làm người yêu tớ nhớ 😭❤️"
+];
+
+let currentQuestion = 0;
+
+const questionText = document.getElementById("questionText");
+
+const yesBtn = document.getElementById("yesBtn");
+
+const noBtn = document.getElementById("noBtn");
+
+const loveTimer = document.getElementById("loveTimer");
+
+let loveStart = null;
+
+let timerStarted = false;
+
+
+/* =========================
+   REALTIME LISTENER
+========================= */
+
+onValue(loveRef, (snapshot) => {
+
+    const data = snapshot.val();
+
+    if(data && data.accepted){
+
+        loveStart = data.startTime;
+
+        questionText.innerHTML =
+            "💖 Chúng mình đang yêu nhau đó 💖";
+
         yesBtn.style.display = "none";
+
         noBtn.style.display = "none";
-        setInterval(updateTimer, 1000);
+
+        loveTimer.style.display = "block";
+
+        if(!timerStarted){
+
+            timerStarted = true;
+
+            updateLoveTimer();
+
+            setInterval(updateLoveTimer,1000);
+
+        }
+
     }
 
-    function updateTimer() {
+});
+
+
+/* =========================
+   YES BUTTON
+========================= */
+
+yesBtn.onclick = function(){
+
+    if(currentQuestion === 3){
+
         const now = new Date().getTime();
-        const diff = now - Number(loveStart);
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        const d = new Date(Number(loveStart));
-        loveTimer.innerHTML = `💖 Yêu từ: ${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} 💖<br><br>` +
-                              `💞 Đã bên nhau: ${days} ngày ${hours} giờ ${mins} phút ${secs} giây 💞`;
+
+        set(loveRef,{
+            accepted:true,
+            startTime:now
+        });
+
+        return;
+
     }
 
-    if (loveStart) startLoveTimer();
+    currentQuestion++;
+
+    questionText.innerHTML = questions[currentQuestion];
+
+    if(currentQuestion === 3){
+
+        yesBtn.innerHTML = "Đồng ý ❤️";
+
+        noBtn.innerHTML = "Không đồng ý 💔";
+
+        noBtn.onmouseover = moveNoButton;
+
+    }
+
+};
+
+
+/* =========================
+   NO BUTTON
+========================= */
+
+noBtn.onclick = function(){
+
+    if(currentQuestion === 3){
+        return;
+    }
+
+    currentQuestion++;
+
+    questionText.innerHTML = questions[currentQuestion];
+
+    if(currentQuestion === 3){
+
+        yesBtn.innerHTML = "Đồng ý ❤️";
+
+        noBtn.innerHTML = "Không đồng ý 💔";
+
+        noBtn.onmouseover = moveNoButton;
+
+    }
+
+};
+
+function moveNoButton(){
+
+    noBtn.style.position = "fixed";
+
+    noBtn.style.left =
+        Math.random()*(window.innerWidth-200) + "px";
+
+    noBtn.style.top =
+        Math.random()*(window.innerHeight-100) + "px";
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+function updateLoveTimer(){
+
+    if(!loveStart) return;
+
+    const now = new Date();
+
+    const diff = now.getTime() - Number(loveStart);
+
+    const days =
+        Math.floor(diff/(1000*60*60*24));
+
+    const hours =
+        Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+
+    const minutes =
+        Math.floor((diff%(1000*60*60))/(1000*60));
+
+    const seconds =
+        Math.floor((diff%(1000*60))/1000);
+
+    const startDate =
+        new Date(Number(loveStart));
+
+    loveTimer.innerHTML =
+    `
+    💖 Yêu nhau từ:
+    ${startDate.getDate()}/
+    ${startDate.getMonth()+1}/
+    ${startDate.getFullYear()}
+
+    <br><br>
+
+    💞 Đã bên nhau:
+    ${days} ngày
+    ${hours} giờ
+    ${minutes} phút
+    ${seconds} giây 💞
+    `;
+
+}
+
+
+/* =========================
+   VIDEO ↔ NHẠC
+========================= */
+
+const bgMusic =
+    document.getElementById("bgMusic");
+
+const loveVideo =
+    document.getElementById("loveVideo");
+
+loveVideo.addEventListener("play",()=>{
+    bgMusic.pause();
+});
+
+loveVideo.addEventListener("pause",()=>{
+    bgMusic.play();
+});
+
+loveVideo.addEventListener("ended",()=>{
+    bgMusic.play();
+});
+
 </script>
 
 </body>
