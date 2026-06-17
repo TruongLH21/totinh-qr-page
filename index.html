@@ -103,7 +103,7 @@ button:hover{
     text-align: center;
 }
 
-/* CHAT BOX */
+/* KHU VỰC CHAT REALTIME */
 .chat-box{
     margin-top:40px;
     background:rgba(255,255,255,0.15);
@@ -111,10 +111,121 @@ button:hover{
     border-radius:25px;
     backdrop-filter:blur(10px);
     box-shadow:0 0 20px rgba(255,255,255,0.3);
+    position: relative;
+}
+.chat-header-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 5px;
 }
 .chat-box h2{
-    margin-bottom:15px;
+    margin: 0;
+    font-size: 24px;
 }
+
+/* THAY ĐỔI: BIỂU TƯỢNG NÚT THƯ NGAY TRÊN ĐOẠN CHAT */
+.letter-widget-btn {
+    background: #ffffff;
+    color: #ff4f81;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-weight: bold;
+    transition: 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    -webkit-tap-highlight-color: transparent;
+}
+.letter-widget-btn:hover {
+    transform: scale(1.05);
+}
+
+/* KHUNG HỘP THƯ POPUP THẢ XUỐNG DƯỚI NÚT */
+.letter-box-popup {
+    position: absolute;
+    top: 65px;
+    left: 20px;
+    right: 20px;
+    height: 400px;
+    background: #ffffff;
+    color: #333;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    z-index: 100;
+    display: none; 
+    flex-direction: column;
+    animation: popupFade 0.2s ease-out forwards;
+}
+@keyframes popupFade {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.letter-box-popup h2 {
+    color: #ff4f81;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+#letterList {
+    flex: 1;
+    overflow-y: auto;
+    background: #fdf6f6;
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #f3e2e2;
+    text-align: left;
+}
+.letter-input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.letter-input-area textarea {
+    width: 100%;
+    height: 65px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    resize: none;
+    font-family: Arial, sans-serif;
+}
+.letter-item {
+    background: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-left: 4px solid #ff758c;
+}
+.letter-from {
+    font-weight: bold;
+    color: #ff4f81;
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+.letter-content {
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    color: #444;
+}
+.letter-time {
+    margin-top: 5px;
+    font-size: 10px;
+    color: #999;
+    text-align: right;
+}
+
 #chatMessages{
     height:300px;
     overflow-y:auto;
@@ -151,110 +262,6 @@ button:hover{
     border-radius:15px;
     outline:none;
     font-size:16px;
-}
-
-/* WIDGET HỘP THƯ GÓC PHẢI */
-.letter-widget-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    background: #ffffff;
-    color: #ff4f81;
-    font-size: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    z-index: 999;
-    transition: 0.3s ease;
-}
-.letter-widget-btn:hover {
-    transform: scale(1.1) rotate(-10deg);
-}
-
-.letter-box-popup {
-    position: fixed;
-    bottom: 110px;
-    right: 30px;
-    width: 360px;
-    max-width: 90vw;
-    height: 480px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    color: #333;
-    border-radius: 25px;
-    padding: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    z-index: 998;
-    display: none; /* Mặc định ẩn */
-    flex-direction: column;
-    animation: popupSlide 0.3s ease forwards;
-}
-@keyframes popupSlide {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.letter-box-popup h2 {
-    color: #ff4f81;
-    font-size: 22px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-#letterList {
-    flex: 1;
-    overflow-y: auto;
-    background: #f9f9f9;
-    padding: 12px;
-    border-radius: 15px;
-    margin-bottom: 12px;
-    border: 1px solid #eee;
-    text-align: left;
-}
-.letter-input-area {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-.letter-input-area textarea {
-    width: 100%;
-    height: 75px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    outline: none;
-    font-size: 14px;
-    resize: none;
-}
-.letter-item {
-    background: #fff;
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-    border-left: 4px solid #ff758c;
-}
-.letter-from {
-    font-weight: bold;
-    color: #ff4f81;
-    font-size: 13px;
-    margin-bottom: 4px;
-}
-.letter-content {
-    font-style: italic;
-    font-size: 14px;
-    line-height: 1.4;
-    white-space: pre-wrap;
-    color: #444;
-}
-.letter-time {
-    margin-top: 6px;
-    font-size: 10px;
-    color: #999;
-    text-align: right;
 }
 
 .heart{
@@ -324,19 +331,21 @@ button:hover{
         <input type="text" id="nicknameInput" placeholder="Nhập biệt danh của bạn 💖">
     </div>
 
-    <div class="letter-widget-btn" id="toggleLetterBtn">💌</div>
-
-    <div class="letter-box-popup" id="letterPopup">
-        <h2>💌 Hộp Thư Kỷ Niệm</h2>
-        <div id="letterList"></div>
-        <div class="letter-input-area">
-            <textarea id="letterInput" placeholder="Viết những lời muốn nhắn gửi dài vào đây nheee... 🌸"></textarea>
-            <button id="sendLetterBtn" style="background:#ff4f81; color:white; margin:0; width:100%; font-size:16px; padding:10px 20px; border-radius:15px; cursor:pointer;">Gửi thư ✉️</button>
-        </div>
-    </div>
-
     <div class="chat-box">
-        <h2>💬 Chat realtime</h2>
+        <div class="chat-header-area">
+            <h2>💬 Chat realtime</h2>
+            <div class="letter-widget-btn" id="toggleLetterBtn">💌 Hộp thư</div>
+        </div>
+
+        <div class="letter-box-popup" id="letterPopup">
+            <h2>💌 Hộp Thư Kỷ Niệm</h2>
+            <div id="letterList"></div>
+            <div class="letter-input-area">
+                <textarea id="letterInput" placeholder="Viết những lời muốn nhắn gửi dài vào đây nheee... 🌸"></textarea>
+                <button id="sendLetterBtn" style="background:#ff4f81; color:white; margin:0; width:100%; font-size:15px; padding:10px; border-radius:12px; cursor:pointer;">Gửi thư ✉️</button>
+            </div>
+        </div>
+
         <div id="chatMessages"></div>
         <div class="chat-input">
             <input type="text" id="messageInput" placeholder="Nhắn gì đó...">
@@ -401,15 +410,15 @@ window.addEventListener("load", () => {
     });
 });
 
-// Xử lý bật/tắt hộp thư
+// Xử lý bật/tắt hộp thư dạng Tab Dropdown ngay trong khu vực chat
 if(toggleLetterBtn && letterPopup) {
     toggleLetterBtn.onclick = () => {
         if(letterPopup.style.display === "none" || letterPopup.style.display === "") {
             letterPopup.style.display = "flex";
-            toggleLetterBtn.innerHTML = "❌";
+            toggleLetterBtn.innerHTML = "❌ Đóng thư";
         } else {
             letterPopup.style.display = "none";
-            toggleLetterBtn.innerHTML = "💌";
+            toggleLetterBtn.innerHTML = "💌 Hộp thư";
         }
     };
 }
