@@ -105,7 +105,7 @@ button:hover{
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* KHU VỰC HỘP THƯ KỶ NIỆM (NẰM GIỮA TRANG) */
+/* HỘP THƯ KỶ NIỆM */
 .letter-box-container {
     margin-top: 25px;
     background: rgba(255, 255, 255, 0.2);
@@ -121,6 +121,89 @@ button:hover{
     font-size: 24px;
     margin-bottom: 15px;
     text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* GIAO DIỆN KHÓA HÒM THƯ (MÁY BẤM SỐ PHÒNG / KÉT SẮT) */
+.keypad-lock-screen {
+    background: #2a2a3e;
+    padding: 25px 20px;
+    border-radius: 25px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 8px 25px rgba(0,0,0,0.3);
+    color: #fff;
+    max-width: 320px;
+    margin: 0 auto;
+    border: 3px solid #ff758c;
+}
+.keypad-title {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ff758c;
+    letter-spacing: 0.5px;
+}
+.keypad-example {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+.keypad-display {
+    background: #111;
+    color: #00ffcc;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    height: 48px;
+    line-height: 48px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    border: 2px solid #444;
+    box-shadow: inset 0 0 8px rgba(0,255,204,0.3);
+    overflow: hidden;
+}
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    justify-items: center;
+}
+.keypad-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #3b3b54;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    border: 2px solid #52527a;
+    box-shadow: 0 4px 0 #1c1c2b;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.1s ease;
+}
+.keypad-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #1c1c2b;
+}
+.keypad-btn.action-btn {
+    background: #ff4f81;
+    border-color: #ff758c;
+    font-size: 18px;
+}
+.keypad-btn.clear-btn {
+    background: #ff4d4d;
+    border-color: #ff6b6b;
+    font-size: 18px;
+}
+
+/* KHU VỰC THƯ KHI MỞ KHÓA */
+.letter-content-area {
+    display: none;
 }
 #letterList {
     height: 250px;
@@ -139,6 +222,7 @@ button:hover{
     margin-bottom: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border-left: 4px solid #ff758c;
+    position: relative;
 }
 .letter-from {
     font-weight: bold;
@@ -190,11 +274,8 @@ button:hover{
     box-shadow: 0 4px 15px rgba(255,255,255,0.3);
     transition: 0.2s;
 }
-#sendLetterBtn:hover {
-    transform: scale(1.03);
-}
 
-/* KHU VỰC CHAT REALTIME */
+/* CHAT REALTIME */
 .chat-box{
     margin-top:30px;
     background:rgba(255,255,255,0.15);
@@ -222,6 +303,7 @@ button:hover{
     margin-bottom:12px;
     word-wrap:break-word;
     color: white;
+    position: relative;
 }
 .message-name{
     font-weight:bold;
@@ -246,6 +328,63 @@ button:hover{
     font-size:16px;
 }
 
+/* ADMIN PANEL */
+.admin-badge {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+.admin-panel {
+    display: none;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 25px;
+    text-align: left;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.admin-panel h3 {
+    margin-bottom: 12px;
+    color: #ff758c;
+}
+.admin-panel input, .admin-panel button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+}
+.admin-panel button {
+    background: #ff4f81;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* NÚT XÓA DÀNH CHO ADMIN */
+.btn-delete-admin {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    z-index: 5;
+}
+
 .heart{
     position:absolute;
     top:-10px;
@@ -255,9 +394,7 @@ button:hover{
     pointer-events:none;
 }
 @keyframes fall{
-    to{
-        transform:translateY(500vh);
-    }
+    to{ transform:translateY(500vh); }
 }
 .message{
     position:absolute;
@@ -268,12 +405,8 @@ button:hover{
     pointer-events:none;
 }
 @keyframes floatMessage{
-    from{
-        transform:translateY(120vh);
-    }
-    to{
-        transform:translateY(-400vh);
-    }
+    from{ transform:translateY(120vh); }
+    to{ transform:translateY(-400vh); }
 }
 </style>
 </head>
@@ -291,13 +424,6 @@ button:hover{
         <img src="IMG_20260329_210144.jpg" alt="Gallery Image">
     </div>
 
-    <iframe src="https://drive.google.com/file/d/1NYLcXiHUxhZsdwU8kjozV-oN7hn06SHp/preview"
-            width="100%"
-            height="400"
-            allow="autoplay"
-            style="border-radius:20px;border:none;display:none;">
-    </iframe>
-
     <h2 id="questionText">Tôi làm web này cho cậu đó, Cậu thấy web này cute chứ? 😳</h2>
 
     <div class="button-box">
@@ -313,12 +439,51 @@ button:hover{
         <input type="text" id="nicknameInput" placeholder="Nhập biệt danh của bạn 💖">
     </div>
 
+    <!-- BẢNG ĐIỀU KHIỂN ADMIN (ĐÃ LOẠI BỎ HOÀN TOÀN NÚT RESET) -->
+    <div id="adminPanel" class="admin-panel">
+        <h3>👑 Bảng Quản Lý Admin</h3>
+        <p style="font-size:13px; margin-bottom:10px;">Bạn đang ở quyền Quản trị viên. Bạn có thể thay đổi câu hỏi hiển thị bên dưới.</p>
+        <div>
+            <label style="font-size:13px;">Sửa tiêu đề câu hỏi chính:</label><br>
+            <input type="text" id="customQuestionInput" placeholder="Nhập câu hỏi mới..." style="width:70%;">
+            <button id="updateQuestionBtn">Đổi ngay</button>
+        </div>
+    </div>
+
+    <!-- HÒM THƯ KỶ NIỆM VỚI BÀN PHÍM BẤM SỐ -->
     <div class="letter-box-container">
-        <h2>💌 Hộp Thư Kỷ Niệm</h2>
-        <div id="letterList"></div>
-        <div class="letter-input-area">
-            <textarea id="letterInput" placeholder="Viết những lời muốn nhắn gửi dài vào đây nheee... 🌸"></textarea>
-            <button id="sendLetterBtn">Gửi thư ngay ✉️</button>
+        <h2>💌 Hòm Thư Kỷ Niệm</h2>
+
+        <!-- Máy Bấm Số Mở Khóa -->
+        <div id="letterLockScreen" class="keypad-lock-screen">
+            <div class="keypad-title">HÃY ĐIỀN NGÀY THÁNG NĂM SINH NGƯỜI TÔI YÊU THƯƠNG 🔒</div>
+            <div class="keypad-example">VÍ DỤ 01012027</div>
+            
+            <div id="keypadDisplay" class="keypad-display">____</div>
+
+            <div class="keypad-grid">
+                <button class="keypad-btn" onclick="pressKey('1')">1</button>
+                <button class="keypad-btn" onclick="pressKey('2')">2</button>
+                <button class="keypad-btn" onclick="pressKey('3')">3</button>
+                <button class="keypad-btn" onclick="pressKey('4')">4</button>
+                <button class="keypad-btn" onclick="pressKey('5')">5</button>
+                <button class="keypad-btn" onclick="pressKey('6')">6</button>
+                <button class="keypad-btn" onclick="pressKey('7')">7</button>
+                <button class="keypad-btn" onclick="pressKey('8')">8</button>
+                <button class="keypad-btn" onclick="pressKey('9')">9</button>
+                <button class="keypad-btn clear-btn" onclick="clearKeypad()">❌</button>
+                <button class="keypad-btn" onclick="pressKey('0')">0</button>
+                <button class="keypad-btn action-btn" onclick="unlockLetterBox()">🔓</button>
+            </div>
+        </div>
+
+        <!-- Khung Nội Dung Thư (Xem & Gửi Thư) -->
+        <div id="letterContentArea" class="letter-content-area">
+            <div id="letterList"></div>
+            <div class="letter-input-area">
+                <textarea id="letterInput" placeholder="Viết những lời muốn nhắn gửi dài vào đây nheee... 🌸"></textarea>
+                <button id="sendLetterBtn">Gửi thư ngay ✉️</button>
+            </div>
         </div>
     </div>
 
@@ -332,9 +497,12 @@ button:hover{
     </div>
 </div>
 
+<!-- NÚT KÍCH HOẠT ADMIN BÍ MẬT -->
+<div class="admin-badge" id="adminTrigger">🔑 Kích hoạt Admin</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, push, onValue, onDisconnect, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, set, push, onValue, onDisconnect, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA6tepLaxllmVi00SmK_50wqWSmgBVOydc",
@@ -353,6 +521,139 @@ const loveRef = ref(db, "loveRoom");
 const chatRef = ref(db, "messages");
 const letterRef = ref(db, "letters");
 
+// ==================== CẤU HÌNH MẬT KHẨU HÒM THƯ ====================
+const LETTER_SECRET_PASS = "21072008"; 
+
+const letterLockScreen = document.getElementById("letterLockScreen");
+const letterContentArea = document.getElementById("letterContentArea");
+const keypadDisplay = document.getElementById("keypadDisplay");
+
+let enteredPin = "";
+
+if (sessionStorage.getItem("isLetterUnlocked") === "true") {
+    letterLockScreen.style.display = "none";
+    letterContentArea.style.display = "block";
+}
+
+function updateDisplay() {
+    if (enteredPin.length === 0) {
+        keypadDisplay.innerHTML = "____";
+    } else {
+        keypadDisplay.innerHTML = "•".repeat(enteredPin.length);
+    }
+}
+
+window.pressKey = (num) => {
+    if (enteredPin.length < 8) {
+        enteredPin += num;
+        updateDisplay();
+    }
+};
+
+window.clearKeypad = () => {
+    enteredPin = "";
+    updateDisplay();
+};
+
+window.unlockLetterBox = () => {
+    if (enteredPin === LETTER_SECRET_PASS) {
+        sessionStorage.setItem("isLetterUnlocked", "true");
+        letterLockScreen.style.display = "none";
+        letterContentArea.style.display = "block";
+        alert("Mở khóa hòm thư thành công! 💖");
+    } else {
+        alert("Sai mật khẩu rồi nè! Thử lại nhé 🌸");
+        enteredPin = "";
+        updateDisplay();
+    }
+};
+
+
+// ==================== CẤU HÌNH ADMIN ====================
+const ADMIN_PASSWORD = "152108"; 
+let isAdmin = localStorage.getItem("isAdmin") === "true";
+
+const adminTrigger = document.getElementById("adminTrigger");
+const adminPanel = document.getElementById("adminPanel");
+
+function checkAdminUI() {
+    if (isAdmin) {
+        adminPanel.style.display = "block";
+        adminTrigger.innerHTML = "🔓 Đã bật Admin";
+    } else {
+        adminPanel.style.display = "none";
+        adminTrigger.innerHTML = "🔑 Kích hoạt Admin";
+    }
+}
+checkAdminUI();
+
+adminTrigger.onclick = () => {
+    if (!isAdmin) {
+        const password = prompt("Nhập mật khẩu Admin của bạn:");
+        if (password === ADMIN_PASSWORD) {
+            isAdmin = true;
+            localStorage.setItem("isAdmin", "true");
+            alert("Đăng nhập Admin thành công! 🎉");
+            checkAdminUI();
+            location.reload();
+        } else if (password !== null) {
+            alert("Sai mật khẩu Admin rồi nhé! ❌");
+        }
+    } else {
+        if(confirm("Bạn có muốn thoát quyền Admin?")) {
+            isAdmin = false;
+            localStorage.setItem("isAdmin", "false");
+            checkAdminUI();
+            location.reload();
+        }
+    }
+};
+
+// ADMIN: Đổi câu hỏi trực tiếp trên Firebase
+document.getElementById("updateQuestionBtn").onclick = () => {
+    const newQ = document.getElementById("customQuestionInput").value.trim();
+    if (newQ) {
+        set(ref(db, "customQuestion"), newQ);
+        alert("Đã cập nhật câu hỏi mới! 🌸");
+    }
+};
+
+// Lắng nghe câu hỏi tùy chỉnh từ Admin
+onValue(ref(db, "customQuestion"), (snapshot) => {
+    const val = snapshot.val();
+    if(val && !loveStart) {
+        document.getElementById("questionText").innerHTML = val;
+    }
+});
+
+
+// ==================== CƠ CHẾ XÓA DỮ LIỆU CHUẨN DÀNH CHO ADMIN ====================
+// Xử lý Xóa Thư bằng Event Delegation
+document.getElementById("letterList").addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("btn-delete-letter")) {
+        const key = e.target.getAttribute("data-key");
+        if (confirm("Admin ơi, bạn có chắc chắn muốn xóa bức thư này không?")) {
+            remove(ref(db, `letters/${key}`))
+                .then(() => alert("Đã xóa thư thành công!"))
+                .catch((err) => alert("Lỗi khi xóa thư: " + err.message));
+        }
+    }
+});
+
+// Xử lý Xóa Chat bằng Event Delegation
+document.getElementById("chatMessages").addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("btn-delete-chat")) {
+        const key = e.target.getAttribute("data-key");
+        if (confirm("Admin ơi, bạn có chắc chắn muốn xóa tin nhắn này không?")) {
+            remove(ref(db, `messages/${key}`))
+                .then(() => alert("Đã xóa tin nhắn thành công!"))
+                .catch((err) => alert("Lỗi khi xóa tin nhắn: " + err.message));
+        }
+    }
+});
+
+
+// ==================== CÁC TÍNH NĂNG NGUYÊN BẢN ====================
 const questionText = document.getElementById("questionText");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
@@ -363,10 +664,12 @@ const messageInput = document.getElementById("messageInput");
 const chatMessages = document.getElementById("chatMessages");
 const nicknameInput = document.getElementById("nicknameInput");
 const bgMusic = document.getElementById("bgMusic");
-
 const letterInput = document.getElementById("letterInput");
 const sendLetterBtn = document.getElementById("sendLetterBtn");
 const letterList = document.getElementById("letterList");
+
+const myId = sessionStorage.getItem("myUserId") || "user_" + Math.random().toString(36).slice(2) + "_" + Date.now();
+sessionStorage.setItem("myUserId", myId);
 
 let myName = localStorage.getItem("nickname") || "Người bí ẩn 💖";
 nicknameInput.value = myName;
@@ -380,9 +683,7 @@ nicknameInput.addEventListener("input", () => {
 window.addEventListener("load", () => {
     bgMusic.volume = 0.2;
     bgMusic.play().catch(() => {
-        document.body.addEventListener("click", () => {
-            bgMusic.play();
-        }, { once: true });
+        document.body.addEventListener("click", () => { bgMusic.play(); }, { once: true });
     });
 });
 
@@ -397,25 +698,6 @@ function createHeart(){
     setTimeout(() => { heart.remove(); }, 7000);
 }
 setInterval(createHeart, 200);
-
-const messages = [
-    "Tớ thích cậu ❤️",
-    "Cậu đáng yêu lắm 🌸",
-    "Có cậu là tuyệt nhất 💖",
-    "Mong cậu luôn vui ✨",
-    "Trường yêu Títtt ❤️"
-];
-
-function createMessage(){
-    const msg = document.createElement("div");
-    msg.classList.add("message");
-    msg.innerHTML = messages[Math.floor(Math.random() * messages.length)];
-    msg.style.left = Math.random() * 90 + "vw";
-    msg.style.animationDuration = Math.random() * 6 + 5 + "s";
-    document.body.appendChild(msg);
-    setTimeout(() => { msg.remove(); }, 12000);
-}
-setInterval(createMessage, 1200);
 
 const questions = [
     "Tôi làm web này cho cậu đó, Cậu thấy web này cute chứ? 😳",
@@ -445,13 +727,8 @@ onValue(loveRef, (snapshot) => {
 
 function setupNoButtonRun() {
     noBtn.onmouseover = moveNoButton;
-    noBtn.ontouchstart = (e) => {
-        e.preventDefault();
-        moveNoButton();
-    };
-    noBtn.onclick = (e) => {
-        e.preventDefault();
-    };
+    noBtn.ontouchstart = (e) => { e.preventDefault(); moveNoButton(); };
+    noBtn.onclick = (e) => { e.preventDefault(); };
 }
 
 function moveNoButton(){
@@ -506,30 +783,25 @@ function updateLoveTimer(){
     `;
 }
 
-const myId = "user_" + Math.random().toString(36).slice(2);
+// Online Realtime
 const myOnlineRef = ref(db, "onlineUsers/" + myId);
 set(myOnlineRef, { online: true, time: Date.now() });
 onDisconnect(myOnlineRef).remove();
 
-const allOnlineRef = ref(db, "onlineUsers");
-onValue(allOnlineRef, (snapshot) => {
+onValue(ref(db, "onlineUsers"), (snapshot) => {
     const data = snapshot.val();
-    if(!data){
-        onlineStatus.innerHTML = "⚪ Không có ai online";
-        return;
-    }
+    if(!data){ onlineStatus.innerHTML = "⚪ Không có ai online"; return; }
     const count = Object.keys(data).length;
     onlineStatus.innerHTML = count === 1 ? "🟢 Có 1 người đang online" : `🟢 Có ${count} người đang online`;
 });
 
-// Gửi thư lên Firebase
+// Gửi thư
 if(sendLetterBtn) {
     sendLetterBtn.onclick = () => {
         const content = letterInput.value.trim();
         if(content === "") return;
 
-        const newLetterRef = push(letterRef);
-        set(newLetterRef, {
+        push(letterRef, {
             from: myName,
             text: content,
             time: Date.now()
@@ -540,7 +812,7 @@ if(sendLetterBtn) {
     };
 }
 
-// Lắng nghe danh sách thư realtime
+// Lắng nghe danh sách thư + Sinh nút xóa chuẩn
 onValue(letterRef, (snapshot) => {
     if(!letterList) return;
     letterList.innerHTML = "";
@@ -549,15 +821,20 @@ onValue(letterRef, (snapshot) => {
         letterList.innerHTML = "<div style='text-align:center; opacity:0.6; font-size:14px; margin-top:20px; color:#666;'>Chưa có bức thư nào được gửi... 🥺</div>";
         return;
     }
-    Object.values(data)
-    .sort((a,b)=>b.time-a.time) 
-    .forEach(lettr => {
+    
+    Object.keys(data)
+    .sort((a,b)=> data[b].time - data[a].time) 
+    .forEach(key => {
+        const lettr = data[key];
         const d = new Date(lettr.time);
         const dateStr = `${d.getDate()}/${d.getMonth()+1} lúc ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
         
+        const deleteBtnHtml = isAdmin ? `<button class="btn-delete-admin btn-delete-letter" data-key="${key}">🗑️ Xóa</button>` : '';
+
         const div = document.createElement("div");
         div.classList.add("letter-item");
         div.innerHTML = `
+            ${deleteBtnHtml}
             <div class="letter-from">✉️ Thư gửi từ: ${lettr.from}</div>
             <div class="letter-content">${lettr.text}</div>
             <div class="letter-time">🕒 Gửi ngày ${dateStr}</div>
@@ -566,23 +843,19 @@ onValue(letterRef, (snapshot) => {
     });
 });
 
-// Chat Realtime
+// Gửi Chat Realtime
 sendBtn.onclick = () => {
     const text = messageInput.value.trim();
     if(text === "") return;
 
     bgMusic.volume = 0.05;
-    const msgRef = push(chatRef);
-    set(msgRef, {
+    push(chatRef, {
+        senderId: myId,
         name: myName,
         text: text,
         time: Date.now(),
         status: "Đã gửi 💌"
     });
-
-    setTimeout(() => {
-        update(msgRef, { status: "Đã xem 👀" });
-    }, 2000);
 
     messageInput.value = "";
     setTimeout(() => { bgMusic.volume = 0.2; }, 3000);
@@ -592,27 +865,36 @@ messageInput.addEventListener("keypress", (e) => {
     if(e.key === "Enter") sendBtn.click();
 });
 
+// Lắng nghe Chat + Sinh nút xóa chuẩn
 onValue(chatRef, (snapshot) => {
     chatMessages.innerHTML = "";
     const data = snapshot.val();
     if(!data) return;
-    Object.values(data)
-    .sort((a,b)=>a.time-b.time)
-    .forEach(msg => {
+    
+    Object.keys(data).forEach(msgKey => {
+        const msg = data[msgKey];
+        
+        if (msg.senderId !== myId && msg.status === "Đã gửi 💌" && document.visibilityState === 'visible') {
+            update(ref(db, `messages/${msgKey}`), { status: "Đã xem 👀" });
+        }
+
         const msgTime = new Date(msg.time);
         const hours = String(msgTime.getHours()).padStart(2, '0');
         const minutes = String(msgTime.getMinutes()).padStart(2, '0');
-        const timeString = `${hours}:${minutes}`;
+        
+        const deleteBtnHtml = isAdmin ? `<button class="btn-delete-admin btn-delete-chat" data-key="${msgKey}">🗑️ Xóa</button>` : '';
 
         const div = document.createElement("div");
         div.classList.add("message-item");
         div.innerHTML = `
-        <div class="message-name">💖 ${msg.name}</div>
-        <div>${msg.text}</div>
-        <div class="message-status">🕒 ${timeString} • ${msg.status || 'Đã gửi 💌'}</div>
+            ${deleteBtnHtml}
+            <div class="message-name">💖 ${msg.name}</div>
+            <div>${msg.text}</div>
+            <div class="message-status">🕒 ${hours}:${minutes} • ${msg.status || 'Đã gửi 💌'}</div>
         `;
         chatMessages.appendChild(div);
     });
+    
     chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 </script>
