@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You ❤️</title>
+<!-- TÍCH HỢP EMAILJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
 *{
     margin:0;
@@ -439,7 +441,7 @@ button:hover{
         <input type="text" id="nicknameInput" placeholder="Nhập biệt danh của bạn 💖">
     </div>
 
-    <!-- BẢNG ĐIỀU KHIỂN ADMIN (ĐÃ LOẠI BỎ HOÀN TOÀN NÚT RESET) -->
+    <!-- BẢNG ĐIỀU KHIỂN ADMIN -->
     <div id="adminPanel" class="admin-panel">
         <h3>👑 Bảng Quản Lý Admin</h3>
         <p style="font-size:13px; margin-bottom:10px;">Bạn đang ở quyền Quản trị viên. Bạn có thể thay đổi câu hỏi hiển thị bên dưới.</p>
@@ -504,6 +506,52 @@ button:hover{
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, set, push, onValue, onDisconnect, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+// ==================== CẤU HÌNH EMAILJS THÔNG BÁO VỀ GMAIL ====================
+const EMAILJS_PUBLIC_KEY = "Xc-bQOJvrT9ComeWv"; 
+const EMAILJS_SERVICE_ID = "nguyentruongx29@gmail.com"; 
+const EMAILJS_TEMPLATE_ID = "template_kx0h4e2"; 
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+function sendVisitorNotification() {
+    if (sessionStorage.getItem("visited_notified")) return;
+
+    fetch("https://api.ipify.org?format=json")
+        .then(res => res.json())
+        .then(data => {
+            const visitorIP = data.ip || "Không xác định";
+            const timeString = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+
+            const templateParams = {
+                message: "Có người vừa truy cập vào website ngôi nhà trái tim của bạn!",
+                access_time: timeString,
+                ip_address: visitorIP,
+                user_agent: navigator.userAgent
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(() => {
+                    console.log("Đã gửi email thông báo thành công!");
+                    sessionStorage.setItem("visited_notified", "true");
+                })
+                .catch(err => console.error("Lỗi gửi EmailJS:", err));
+        })
+        .catch(() => {
+            const timeString = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                message: "Có người vừa truy cập trang web!",
+                access_time: timeString,
+                ip_address: "Không lấy được IP",
+                user_agent: navigator.userAgent
+            });
+            sessionStorage.setItem("visited_notified", "true");
+        });
+}
+
+// Gọi hàm gửi email ngay khi trang tải xong
+sendVisitorNotification();
+
+// ==================== CẤU HÌNH FIREBASE ====================
 const firebaseConfig = {
   apiKey: "AIzaSyA6tepLaxllmVi00SmK_50wqWSmgBVOydc",
   authDomain: "totinhlh21.firebaseapp.com",
@@ -568,7 +616,6 @@ window.unlockLetterBox = () => {
     }
 };
 
-
 // ==================== CẤU HÌNH ADMIN ====================
 const ADMIN_PASSWORD = "152108"; 
 let isAdmin = localStorage.getItem("isAdmin") === "true";
@@ -626,9 +673,7 @@ onValue(ref(db, "customQuestion"), (snapshot) => {
     }
 });
 
-
-// ==================== CƠ CHẾ XÓA DỮ LIỆU CHUẨN DÀNH CHO ADMIN ====================
-// Xử lý Xóa Thư bằng Event Delegation
+// ==================== CƠ CHẾ XÓA DỮ LIỆU DÀNH CHO ADMIN ====================
 document.getElementById("letterList").addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("btn-delete-letter")) {
         const key = e.target.getAttribute("data-key");
@@ -640,7 +685,6 @@ document.getElementById("letterList").addEventListener("click", (e) => {
     }
 });
 
-// Xử lý Xóa Chat bằng Event Delegation
 document.getElementById("chatMessages").addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("btn-delete-chat")) {
         const key = e.target.getAttribute("data-key");
@@ -651,7 +695,6 @@ document.getElementById("chatMessages").addEventListener("click", (e) => {
         }
     }
 });
-
 
 // ==================== CÁC TÍNH NĂNG NGUYÊN BẢN ====================
 const questionText = document.getElementById("questionText");
