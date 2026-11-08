@@ -15,11 +15,53 @@
 body{
     font-family:Arial,sans-serif;
     overflow-x:hidden;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    background:#000;
     min-height:100vh;
     position:relative;
     color:white;
 }
+
+/* ===== NỀN CHIA ĐÔI ===== */
+#bgLeft, #bgRight{
+    position:fixed;
+    top:0;
+    bottom:0;
+    z-index:0;
+    pointer-events:none;
+}
+#bgLeft{
+    left:0;
+    width:50%;
+    background:#000;
+}
+#bgRight{
+    right:0;
+    width:50%;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    transition:background 1s ease;
+}
+/* Khi TẠM DỪNG: toàn bộ nền đen */
+body.paused #bgRight{
+    background:#000;
+}
+#bigHeart{
+    position:fixed;
+    left:25%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:min(42vw,340px);
+    z-index:1;
+    pointer-events:none;
+    filter:drop-shadow(0 0 14px rgba(255,255,255,0.12));
+    transition:left 1.2s ease, width 1.2s ease, filter 1.2s ease;
+}
+/* Khi TẠM DỪNG: tim nứt chạy về giữa và to hơn */
+body.paused #bigHeart{
+    left:50%;
+    width:min(85vw,600px);
+    filter:drop-shadow(0 0 25px rgba(255,255,255,0.25));
+}
+
 .main{
     width:90%;
     max-width:700px;
@@ -87,6 +129,26 @@ button:hover{
     text-shadow:0 0 20px rgba(255,255,255,0.9);
     line-height:1.7;
 }
+
+/* NÚT TẠM DỪNG ĐẾM THỜI GIAN (nằm ngay dưới dòng "Yêu nhau từ") */
+#pauseTimerBtn{
+    display:block;
+    width:100%;
+    max-width:100%;
+    margin:15px auto;
+    padding:14px 20px;
+    font-size:26px;
+    line-height:1.3;
+    white-space:normal;
+    background:#222;
+    color:#fff;
+    border-radius:25px;
+}
+#pauseTimerBtn.is-paused{
+    background:#ffffff;
+    color:#111;
+}
+
 #onlineStatus{
     margin-top:20px;
     font-size:18px;
@@ -105,6 +167,83 @@ button:hover{
     font-size:16px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== KHUNG KHẢO SÁT ===== */
+.survey-frame{
+    margin:0 auto 25px;
+    background:rgba(255,255,255,0.18);
+    padding:20px 15px;
+    border-radius:25px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 20px rgba(255,255,255,0.25);
+    border:1px solid rgba(255,255,255,0.25);
+}
+.survey-frame h2{
+    font-size:24px;
+    margin-bottom:15px;
+    text-shadow:0 0 10px rgba(255,255,255,0.5);
+}
+.survey-box{
+    background:rgba(0,0,0,0.28);
+    border-radius:16px;
+    padding:10px 6px;
+    margin-bottom:12px;
+}
+.survey-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+    align-items:center;
+}
+.survey-cell{
+    font-size:14px;
+    padding:8px 4px;
+    border-radius:10px;
+    background:rgba(255,255,255,0.1);
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    line-height:1.25;
+    word-break:break-word;
+}
+.survey-cell.title{
+    font-weight:bold;
+    background:rgba(255,79,129,0.55);
+}
+.survey-cell label{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    cursor:pointer;
+    width:100%;
+}
+.survey-cell input[type=checkbox]{
+    width:18px;
+    height:18px;
+    accent-color:#ff4f81;
+    cursor:pointer;
+    flex-shrink:0;
+}
+.survey-note{
+    font-size:12px;
+    opacity:0.8;
+    margin-top:4px;
+}
+#surveySendBtn{
+    margin:10px 0 0;
+    padding:12px 30px;
+    font-size:18px;
+    background:white;
+    color:#ff4f81;
+}
+#surveySendBtn:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
+    transform:none;
 }
 
 /* HỘP THƯ KỶ NIỆM */
@@ -371,6 +510,13 @@ button:hover{
     cursor: pointer;
     margin-left: 5px;
 }
+.admin-panel .admin-row{
+    margin-bottom:14px;
+}
+.admin-panel button#resetTimerBtn{
+    margin:6px 0 0;
+    background:#ff4d4d;
+}
 
 /* NÚT XÓA DÀNH CHO ADMIN */
 .btn-delete-admin {
@@ -394,6 +540,13 @@ button:hover{
     animation:fall linear forwards;
     opacity:0.8;
     pointer-events:none;
+    z-index:2;
+}
+/* Tim rơi ở nửa đen (hoặc khi tạm dừng) => màu xám sáng, không chìm vào nền đen */
+.heart-gray,
+body.paused .heart{
+    filter:grayscale(1) brightness(1.8);
+    opacity:0.9;
 }
 @keyframes fall{
     to{ transform:translateY(500vh); }
@@ -410,9 +563,32 @@ button:hover{
     from{ transform:translateY(120vh); }
     to{ transform:translateY(-400vh); }
 }
+
+@media (max-width:480px){
+    .main h1{ font-size:38px; }
+    .survey-cell{ font-size:12px; padding:6px 2px; }
+    #pauseTimerBtn{ font-size:20px; }
+}
 </style>
 </head>
 <body>
+
+<!-- NỀN CHIA ĐÔI: TRÁI ĐEN + TIM ĐEN HƠI NỨT / PHẢI HỒNG -->
+<div id="bgLeft"></div>
+<div id="bgRight"></div>
+<svg id="bigHeart" viewBox="-4 -4 108 98" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+        <linearGradient id="heartGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1d1d1d"/>
+            <stop offset="1" stop-color="#050505"/>
+        </linearGradient>
+    </defs>
+    <path d="M50 88 C10 55 0 35 0 22 C0 8 12 0 25 0 C37 0 46 8 50 16 C54 8 63 0 75 0 C88 0 100 8 100 22 C100 35 90 55 50 88Z"
+          fill="url(#heartGrad)" stroke="#3a3a3a" stroke-width="1.5"/>
+    <!-- Vết nứt nhẹ -->
+    <path d="M50 16 L46 28 L53 38 L48 50 L52 60" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M51 16 L47.2 28 L54.2 38 L49.2 50 L53.2 60" fill="none" stroke="#4a4a4a" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+</svg>
 
 <audio id="bgMusic" autoplay loop>
     <source src="mot-doi.mp3.mp3" type="audio/mpeg">
@@ -421,6 +597,46 @@ button:hover{
 <div class="main">
     <h1>❤️ Gửi Đến Cậu ❤️</h1>
     <p>Chào mừng đến ngôi nhà trái tim của tuiii 💞</p>
+
+    <!-- KHUNG 1: HÔM NAY BẠN THẾ NÀO? -->
+    <div class="survey-frame" id="todayFrame">
+        <h2>Hôm nay bạn thế nào?</h2>
+
+        <!-- Ô 1: Sức khỏe -->
+        <div class="survey-box">
+            <div class="survey-row">
+                <div class="survey-cell title">Sức khỏe</div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-health" value="Tốt"> Tốt</label></div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-health" value="Bình thường, ổn"> Bình thường, ổn</label></div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-health" value="Tệ, ốm"> Tệ, ốm</label></div>
+            </div>
+        </div>
+
+        <!-- Ô 2: Tâm trạng -->
+        <div class="survey-box">
+            <div class="survey-row">
+                <div class="survey-cell title">Tâm trạng</div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-mood" value="Tốt"> Tốt</label></div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-mood" value="Bình thường"> Bình thường</label></div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-mood" value="Chán và tệ"> Chán và tệ</label></div>
+            </div>
+        </div>
+        <div class="survey-note">Mỗi ô chỉ tích được 1 lựa chọn</div>
+    </div>
+
+    <!-- KHUNG 2: TƯƠNG LAI CHÚNG TA NHƯ NÀO? -->
+    <div class="survey-frame" id="futureFrame">
+        <h2>Tương lai chúng ta như nào?</h2>
+        <div class="survey-box">
+            <div class="survey-row">
+                <div class="survey-cell"><label><input type="checkbox" class="grp-future" value="Tệ"> Tệ</label></div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-future" value="Bình thường"> Bình thường</label></div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-future" value="Tốt"> Tốt</label></div>
+                <div class="survey-cell"><label><input type="checkbox" class="grp-future" value="Tôi mong cả 2 chúng ta đều đến được với nhau trong tương lai gần"> Tôi mong cả 2 chúng ta đều đến được với nhau trong tương lai gần</label></div>
+            </div>
+        </div>
+        <button id="surveySendBtn">Gửi 💌</button>
+    </div>
 
     <div class="gallery">
         <img src="IMG_20260329_210144.jpg" alt="Gallery Image">
@@ -433,7 +649,12 @@ button:hover{
         <button id="noBtn">Không 💔</button>
     </div>
 
-    <div id="loveTimer"></div>
+    <div id="loveTimer">
+        <div id="loveStartLine"></div>
+        <!-- NÚT TẠM DỪNG / TIẾP TỤC ĐẾM THỜI GIAN -->
+        <button id="pauseTimerBtn">BẤM VÀO ĐÂY NẾU BẠN MUỐN NGƯNG ĐẾM THỜI GIAN</button>
+        <div id="loveCounter"></div>
+    </div>
 
     <div id="onlineStatus">🟢 Đang kết nối realtime...</div>
 
@@ -445,10 +666,14 @@ button:hover{
     <div id="adminPanel" class="admin-panel">
         <h3>👑 Bảng Quản Lý Admin</h3>
         <p style="font-size:13px; margin-bottom:10px;">Bạn đang ở quyền Quản trị viên. Bạn có thể thay đổi câu hỏi hiển thị bên dưới.</p>
-        <div>
+        <div class="admin-row">
             <label style="font-size:13px;">Sửa tiêu đề câu hỏi chính:</label><br>
             <input type="text" id="customQuestionInput" placeholder="Nhập câu hỏi mới..." style="width:70%;">
             <button id="updateQuestionBtn">Đổi ngay</button>
+        </div>
+        <div class="admin-row">
+            <label style="font-size:13px;">Đồng hồ đếm thời gian:</label><br>
+            <button id="resetTimerBtn">🔄 Reset lại thời gian (đếm lại từ đầu)</button>
         </div>
     </div>
 
@@ -502,6 +727,26 @@ button:hover{
 <!-- NÚT KÍCH HOẠT ADMIN BÍ MẬT -->
 <div class="admin-badge" id="adminTrigger">🔑 Kích hoạt Admin</div>
 
+<!-- Mỗi ô (Sức khỏe / Tâm trạng) chỉ tích được 1 lựa chọn: chọn ô mới thì ô cũ tự bỏ dấu tích -->
+<script>
+(function () {
+    function makeSingleChoice(className) {
+        var boxes = document.querySelectorAll("." + className);
+        boxes.forEach(function (cb) {
+            cb.addEventListener("change", function () {
+                if (cb.checked) {
+                    boxes.forEach(function (other) {
+                        if (other !== cb) other.checked = false;
+                    });
+                }
+            });
+        });
+    }
+    makeSingleChoice("grp-health");
+    makeSingleChoice("grp-mood");
+})();
+</script>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, set, push, onValue, onDisconnect, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -510,6 +755,7 @@ import { getDatabase, ref, set, push, onValue, onDisconnect, update, remove } fr
 const EMAILJS_PUBLIC_KEY = "Xc-bQOJvrT9ComeWv"; 
 const EMAILJS_SERVICE_ID = "nguyentruongx29@gmail.co"; 
 const EMAILJS_TEMPLATE_ID = "template_kx0h4e2"; 
+const SURVEY_RECEIVER_EMAIL = "truongdaumoix29@gmail.com";
 
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
@@ -523,6 +769,7 @@ function sendVisitorNotification() {
             const timeString = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
 
             const templateParams = {
+                to_email: SURVEY_RECEIVER_EMAIL,
                 message: "Có người vừa truy cập vào website ngôi nhà trái tim của bạn!",
                 access_time: timeString,
                 ip_address: visitorIP,
@@ -539,6 +786,7 @@ function sendVisitorNotification() {
         .catch(() => {
             const timeString = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                to_email: SURVEY_RECEIVER_EMAIL,
                 message: "Có người vừa truy cập trang web!",
                 access_time: timeString,
                 ip_address: "Không lấy được IP",
@@ -568,6 +816,63 @@ const db = getDatabase(app);
 const loveRef = ref(db, "loveRoom");
 const chatRef = ref(db, "messages");
 const letterRef = ref(db, "letters");
+
+// ==================== KHẢO SÁT: HÔM NAY BẠN THẾ NÀO? / TƯƠNG LAI ====================
+// (Logic "mỗi ô chỉ tích 1 lựa chọn" nằm ở script riêng phía trên để luôn hoạt động)
+
+function getChecked(className) {
+    return Array.from(document.querySelectorAll("." + className))
+        .filter(cb => cb.checked)
+        .map(cb => cb.value);
+}
+
+const surveySendBtn = document.getElementById("surveySendBtn");
+surveySendBtn.onclick = () => {
+    const health = getChecked("grp-health");
+    const mood = getChecked("grp-mood");
+    const future = getChecked("grp-future");
+
+    if (health.length === 0 || mood.length === 0) {
+        alert("Hãy tích đủ cả Sức khỏe và Tâm trạng nhé 🌸");
+        return;
+    }
+    if (future.length === 0) {
+        alert("Hãy tích ít nhất 1 ô ở mục 'Tương lai chúng ta như nào?' nhé 💖");
+        return;
+    }
+
+    const nick = (localStorage.getItem("nickname") || "Người bí ẩn 💖");
+    const timeString = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+    const message =
+        "📋 KẾT QUẢ KHẢO SÁT\n" +
+        "Người gửi: " + nick + "\n\n" +
+        "HÔM NAY BẠN THẾ NÀO?\n" +
+        "- Sức khỏe: " + health.join(", ") + "\n" +
+        "- Tâm trạng: " + mood.join(", ") + "\n\n" +
+        "TƯƠNG LAI CHÚNG TA NHƯ NÀO?\n" +
+        "- " + future.join("\n- ");
+
+    surveySendBtn.disabled = true;
+    surveySendBtn.innerHTML = "Đang gửi...";
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        to_email: SURVEY_RECEIVER_EMAIL,
+        message: message,
+        access_time: timeString,
+        ip_address: "Khảo sát",
+        user_agent: navigator.userAgent
+    })
+    .then(() => {
+        surveySendBtn.innerHTML = "Đã gửi ✅";
+        alert("Đã gửi thông tin thành công! 💌");
+    })
+    .catch(err => {
+        console.error("Lỗi gửi khảo sát:", err);
+        surveySendBtn.disabled = false;
+        surveySendBtn.innerHTML = "Gửi 💌";
+        alert("Gửi chưa được, bạn thử lại nhé! ❌");
+    });
+};
 
 // ==================== CẤU HÌNH MẬT KHẨU HÒM THƯ ====================
 const LETTER_SECRET_PASS = "21072008"; 
@@ -665,6 +970,26 @@ document.getElementById("updateQuestionBtn").onclick = () => {
     }
 };
 
+// ADMIN: Reset lại thời gian đếm (đếm lại từ đầu, từ thời điểm bấm)
+document.getElementById("resetTimerBtn").onclick = () => {
+    if (!isAdmin) return;
+    if (!loveStart) {
+        alert("Đồng hồ chưa bắt đầu đếm nên chưa cần reset nhé! 🌸");
+        return;
+    }
+    if (confirm("Admin có chắc chắn muốn RESET đồng hồ về 0 và đếm lại từ bây giờ không?")) {
+        set(loveRef, {
+            accepted: true,
+            startTime: Date.now(),
+            paused: false,
+            pausedAt: null,
+            totalPaused: 0
+        })
+        .then(() => alert("Đã reset thời gian thành công! 🔄"))
+        .catch(err => alert("Lỗi khi reset: " + err.message));
+    }
+};
+
 // Lắng nghe câu hỏi tùy chỉnh từ Admin
 onValue(ref(db, "customQuestion"), (snapshot) => {
     const val = snapshot.val();
@@ -710,6 +1035,9 @@ const bgMusic = document.getElementById("bgMusic");
 const letterInput = document.getElementById("letterInput");
 const sendLetterBtn = document.getElementById("sendLetterBtn");
 const letterList = document.getElementById("letterList");
+const pauseTimerBtn = document.getElementById("pauseTimerBtn");
+const loveStartLine = document.getElementById("loveStartLine");
+const loveCounter = document.getElementById("loveCounter");
 
 const myId = sessionStorage.getItem("myUserId") || "user_" + Math.random().toString(36).slice(2) + "_" + Date.now();
 sessionStorage.setItem("myUserId", myId);
@@ -734,7 +1062,10 @@ function createHeart(){
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
+    const leftPercent = Math.random() * 100;
+    heart.style.left = leftPercent + "vw";
+    // Tim rơi ở nửa đen (bên trái) => màu xám, không chìm vào nền đen
+    if (leftPercent < 50) heart.classList.add("heart-gray");
     heart.style.fontSize = Math.random() * 20 + 15 + "px";
     heart.style.animationDuration = Math.random() * 3 + 3 + "s";
     document.body.appendChild(heart);
@@ -752,21 +1083,60 @@ let currentQuestion = 0;
 let loveStart = null;
 let timerStarted = false;
 
+// Trạng thái tạm dừng (đồng bộ realtime qua Firebase)
+let isPaused = false;
+let pausedAt = null;      // thời điểm bắt đầu tạm dừng
+let totalPaused = 0;      // tổng thời gian đã tạm dừng trước đó (ms)
+
+function applyPausedUI() {
+    document.body.classList.toggle("paused", isPaused);
+    if (isPaused) {
+        pauseTimerBtn.innerHTML = "▶️ BẤM VÀO ĐÂY ĐỂ TIẾP TỤC ĐẾM THỜI GIAN";
+        pauseTimerBtn.classList.add("is-paused");
+    } else {
+        pauseTimerBtn.innerHTML = "BẤM VÀO ĐÂY NẾU BẠN MUỐN NGƯNG ĐẾM THỜI GIAN";
+        pauseTimerBtn.classList.remove("is-paused");
+    }
+}
+
 onValue(loveRef, (snapshot) => {
     const data = snapshot.val();
     if(data && data.accepted){
         loveStart = data.startTime;
+        isPaused = data.paused === true;
+        pausedAt = data.pausedAt ? Number(data.pausedAt) : null;
+        totalPaused = Number(data.totalPaused || 0);
+
+        applyPausedUI();
+
         questionText.innerHTML = "💖 Chúng mình đã trở thành người đặc biệt của nhau 💖";
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
         loveTimer.style.display = "block";
         if(!timerStarted){
             timerStarted = true;
-            updateLoveTimer();
             setInterval(updateLoveTimer, 1000);
         }
+        updateLoveTimer();
     }
 });
+
+// Nút Tạm dừng / Tiếp tục đếm thời gian
+pauseTimerBtn.onclick = () => {
+    if (!loveStart) {
+        alert("Đồng hồ chưa bắt đầu đếm nên chưa tạm dừng được nhé 🌸");
+        return;
+    }
+    const now = Date.now();
+    if (!isPaused) {
+        // TẠM DỪNG: chỉ ghi lại thời điểm dừng, KHÔNG reset
+        update(loveRef, { paused: true, pausedAt: now });
+    } else {
+        // TIẾP TỤC: cộng thời gian đã dừng vào tổng để đồng hồ chạy tiếp đúng chỗ cũ
+        const added = pausedAt ? (now - pausedAt) : 0;
+        update(loveRef, { paused: false, pausedAt: null, totalPaused: totalPaused + added });
+    }
+};
 
 function setupNoButtonRun() {
     noBtn.onmouseover = moveNoButton;
@@ -785,7 +1155,7 @@ function moveNoButton(){
 yesBtn.onclick = function(){
     if(currentQuestion === 3){
         const now = new Date().getTime();
-        set(loveRef, { accepted: true, startTime: now });
+        set(loveRef, { accepted: true, startTime: now, paused: false, pausedAt: null, totalPaused: 0 });
         return;
     }
     currentQuestion++;
@@ -810,19 +1180,23 @@ noBtn.onclick = function(){
 
 function updateLoveTimer(){
     if(!loveStart) return;
-    const now = new Date();
-    const diff = now.getTime() - Number(loveStart);
+    // Nếu đang tạm dừng thì đóng băng tại thời điểm pausedAt
+    const reference = (isPaused && pausedAt) ? pausedAt : Date.now();
+    let diff = reference - Number(loveStart) - totalPaused;
+    if (diff < 0) diff = 0;
+
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
     const startDate = new Date(Number(loveStart));
 
-    loveTimer.innerHTML = `
-    💖 Yêu nhau từ: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}
-    <br><br>
+    loveStartLine.innerHTML = `💖 Yêu nhau từ: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
+
+    loveCounter.innerHTML = `
     💞 Đã tin tưởng nhau:<br>
     ${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây 💞
+    ${isPaused ? "<br><span style='font-size:18px;opacity:0.8;'>⏸️ Đang tạm dừng</span>" : ""}
     `;
 }
 
